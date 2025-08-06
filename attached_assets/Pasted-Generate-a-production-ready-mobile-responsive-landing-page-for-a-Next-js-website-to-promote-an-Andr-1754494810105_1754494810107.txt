@@ -1,0 +1,71 @@
+Generate a production-ready, mobile-responsive landing page for a Next.js website to promote an Android app named **"Samadhan GS"**. The purpose of the app is to help aspirants prepare for government competitive exams (like UPSC, SSC, State PSCs, etc.) by offering quality General Studies (GS/GK) content.
+
+### Technical Stack:
+- **Next.js (App Router)**
+- **Tailwind CSS** for styling
+- **Framer Motion** for animations
+- **Aceternity UI** components for modern UI elements
+- **Sanity.io CMS** for blogs integration
+- Bento grid layout for feature presentation
+- Fully responsive and mobile-first
+
+### Website Sections:
+
+1. **Hero Section**
+   - Title: "Samadhan GS – Your Companion for Competitive Exams"
+   - Subtitle: "Read. Understand. Crack Exams."
+   - CTA Buttons:
+     - "Download App" → Link to Google Play Store
+     - "Explore Features"
+   - Animated phone mockup with Framer Motion showing app UI preview
+
+2. **Bento-Style Features Section** – Modern grid layout with animation
+   - Cards showcasing key features:
+     - 📚 Complete GS/GK Syllabus Coverage
+     - 🌐 Bilingual & Easy-to-Understand Language (Hindi & English)
+     - 💾 Offline Downloads & Favorites
+     - 🎯 Exam-wise Preparation Strategy
+     - 📊 Exam Analysis & Reports
+     - 🔄 Regular Content Updates
+     - 🧠 Expert-Curated Notes
+   - Use hover effects and animation via Framer Motion
+
+3. **User Reviews Section**
+   - Beautiful testimonial cards using Aceternity UI cards
+   - Include star ratings, user name, avatar, and review text
+   - Carousel or masonry layout optional
+
+4. **Blog Section (Sanity.io Integration)**
+   - Dynamically fetch and display latest blogs using GROQ queries
+   - Blog cards with:
+     - Title
+     - Cover Image
+     - Excerpt
+     - Link to full blog
+   - Blog route: `/blog/[slug]`
+
+5. **About Section**
+   - Overview of mission & vision
+   - Quote from the team or founder
+
+6. **Newsletter/CTA Section**
+   - Email subscription form (can be dummy or integrated with Sanity)
+
+7. **Footer**
+   - Links to social media, privacy policy, contact
+   - Minimal design with logo and tagline
+
+### Design Notes:
+- Use Bento box layout to make the website visually rich and modular
+- Use subtle animations and transitions via **Framer Motion**
+- Cards and buttons must have hover states, shadows, and rounded corners
+- Typography should be clean and readable, using Tailwind's modern font utilities
+- Use consistent primary color (e.g., deep blue or teal) matching the Samadhan GS app branding
+
+### Deliverables:
+- Fully functional Next.js App Directory setup
+- Tailwind config and Framer Motion animation presets
+- Blog schema and GROQ queries for Sanity
+- Reusable components for FeatureCard, ReviewCard, BlogCard
+- Responsive design for all sections
+
