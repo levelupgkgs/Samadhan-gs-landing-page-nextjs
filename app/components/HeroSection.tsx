@@ -74,14 +74,6 @@ export default function HeroSection() {
             >
               Download App
             </motion.a>
-            <motion.button
-              className="glass-effect text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/20 transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              Explore Features
-            </motion.button>
           </motion.div>
         </motion.div>
 
