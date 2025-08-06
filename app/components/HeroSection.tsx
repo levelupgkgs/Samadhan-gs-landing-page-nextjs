@@ -126,6 +126,30 @@ export default function HeroSection() {
           </motion.div>
         </motion.div>
       </div>
+
+      {/* Bottom Center Buttons */}
+      <motion.div 
+        className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex gap-4 z-10"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.0, duration: 0.6 }}
+      >
+        <motion.a
+          href="/syllabus"
+          className="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 rounded-full font-medium hover:bg-white/20 transition-all duration-300"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          Browse Syllabus
+        </motion.a>
+        <motion.button
+          className="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 rounded-full font-medium hover:bg-white/20 transition-all duration-300"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          Exam Analysis
+        </motion.button>
+      </motion.div>
     </section>
   )
 }
