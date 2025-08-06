@@ -6,50 +6,48 @@ const features = [
   {
     title: 'Complete GS/GK Syllabus Coverage',
     description: 'Comprehensive content covering all major competitive exam syllabi',
-    icon: '📚',
-    span: 'col-span-1 row-span-2'
+    icon: '📚'
   },
   {
     title: 'Bilingual Content',
     description: 'Easy-to-understand language in Hindi & English',
-    icon: '🌐',
-    span: 'col-span-1'
+    icon: '🌐'
   },
   {
     title: 'Offline Downloads',
     description: 'Download content and access without internet',
-    icon: '💾',
-    span: 'col-span-1'
+    icon: '💾'
   },
   {
     title: 'Exam-wise Strategy',
     description: 'Tailored preparation strategies for UPSC, SSC, State PSCs',
-    icon: '🎯',
-    span: 'col-span-2'
+    icon: '🎯'
   },
   {
     title: 'Analysis & Reports',
     description: 'Detailed exam analysis and performance reports',
-    icon: '📊',
-    span: 'col-span-1'
+    icon: '📊'
   },
   {
     title: 'Regular Updates',
     description: 'Fresh content updated regularly',
-    icon: '🔄',
-    span: 'col-span-1'
+    icon: '🔄'
   },
   {
     title: 'Expert-Curated Notes',
     description: 'Quality content prepared by subject matter experts',
-    icon: '🧠',
-    span: 'col-span-1'
+    icon: '🧠'
+  },
+  {
+    title: 'Mock Tests',
+    description: 'Practice with comprehensive mock test series',
+    icon: '✍️'
   }
 ]
 
 export default function FeaturesSection() {
   return (
-    <section id="features" className="py-20 px-4 sm:px-6 lg:px-8">
+    <section className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <motion.div 
           className="text-center mb-16"
@@ -66,25 +64,25 @@ export default function FeaturesSection() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              className={`bento-card ${feature.span} group`}
+              className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 group"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              whileHover={{ y: -5 }}
+              whileHover={{ y: -5, scale: 1.02 }}
             >
-              <div className="flex flex-col h-full">
+              <div className="flex flex-col items-center text-center h-full">
                 <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
+                <h3 className="text-lg font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
                   {feature.title}
                 </h3>
-                <p className="text-gray-300 flex-grow">
+                <p className="text-gray-300 text-sm flex-grow">
                   {feature.description}
                 </p>
               </div>

@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden pt-16">
       {/* Background Animation */}
       <div className="absolute inset-0 overflow-hidden">
         {[...Array(20)].map((_, i) => (
