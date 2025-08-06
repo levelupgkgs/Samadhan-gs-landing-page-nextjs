@@ -46,7 +46,7 @@ export default function HeroSection() {
             transition={{ delay: 0.2 }}
           >
             <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Samadhan GS
+              Master on GK/GS for Government exam with Expert Resources
             </span>
             <br />
             <span className="text-2xl sm:text-3xl lg:text-4xl text-gray-200">
@@ -114,7 +114,7 @@ export default function HeroSection() {
                   <div className="w-16 h-16 bg-white/20 rounded-2xl mb-4 mx-auto flex items-center justify-center">
                     <span className="text-2xl">📚</span>
                   </div>
-                  <h3 className="font-bold text-lg mb-2">Samadhan GS</h3>
+                  <h3 className="font-bold text-lg mb-2">Master on GK/GS</h3>
                   <p className="text-sm opacity-80">Complete Exam Prep</p>
                 </div>
                 <div className="grid grid-cols-2 gap-2 w-full px-4">
