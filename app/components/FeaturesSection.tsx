@@ -4,43 +4,43 @@ import { motion } from 'framer-motion'
 
 const features = [
   {
-    title: 'Complete GS/GK Syllabus Coverage',
-    description: 'Comprehensive content covering all major competitive exam syllabi',
+    title: 'Complete GS/GK Syllabus',
+    description: "From comprehensive GK/GS study materials to smart organization tools, we've packed every feature to accelerate your exam preparation journey.",
     icon: '📚'
   },
   {
-    title: 'Bilingual Content',
-    description: 'Easy-to-understand language in Hindi & English',
+    title: 'Bilingual and easy to understand language',
+    description: 'Language is kept as simple as possible to ensure concept clarity for both English and Hindi medium students.',
     icon: '🌐'
   },
   {
-    title: 'Offline Downloads',
-    description: 'Download content and access without internet',
+    title: 'Favorites & Offline Downloads',
+    description: 'Download PDFs for offline reading. Study anywhere, anytime without internet connectivity. Perfect for Multiple times revision to get confidence on subject.',
     icon: '💾'
   },
   {
-    title: 'Exam-wise Strategy',
-    description: 'Tailored preparation strategies for UPSC, SSC, State PSCs',
+    title: 'Exam-wise Preparation',
+    description: 'Prepare exam-wise by analyzing previous years GK/GS questions. This approach helps you target your specific exam and build a strong strategy to score above 90% in upcoming attempts.',
     icon: '🎯'
   },
   {
-    title: 'Analysis & Reports',
-    description: 'Detailed exam analysis and performance reports',
+    title: 'Exam Analysis & Reports',
+    description: 'It includes the exam pattern, percentage weightage of the GK/GS subject in previous years, previous year questions, cut-off marks, and job profile.',
     icon: '📊'
   },
   {
-    title: 'Regular Updates',
-    description: 'Fresh content updated regularly',
+    title: 'Regular Content Updates',
+    description: 'Stay ahead with weekly content updates, latest exam patterns, and fresh study materials. Never miss important changes in your competitive exam syllabus.',
     icon: '🔄'
   },
   {
-    title: 'Expert-Curated Notes',
-    description: 'Quality content prepared by subject matter experts',
+    title: 'Expert-Curated Content',
+    description: 'All materials are reviewed by subject matter experts and successful candidates.Get the most relevant, up-to- date content that actually helps you crack exams.',
     icon: '🧠'
   },
   {
-    title: 'Mock Tests',
-    description: 'Practice with comprehensive mock test series',
+    title: 'Daily & Weekly Quizzes',
+    description: 'Stay exam-ready with daily MCQs and weekly quizzes designed to test and improve your knowledge.',
     icon: '✍️'
   }
 ]

@@ -7,28 +7,28 @@ const reviews = [
     name: 'Priya Sharma',
     avatar: '👩‍🎓',
     rating: 5,
-    text: 'Samadhan GS helped me crack the SSC CGL exam! The bilingual content made complex topics easy to understand.',
+    text: 'Scored 92% in GK/GS in SSC CGL! The topic-wise practice and analysis really worked.',
     exam: 'SSC CGL Qualified'
   },
   {
     name: 'Rohit Kumar',
     avatar: '👨‍💼',
     rating: 5,
-    text: 'The offline download feature was a game-changer. I could study anywhere without worrying about internet connectivity.',
+    text: 'Cleared Bihar SI thanks to deep GK prep—modern history and polity were spot on!',
     exam: 'UPSC Mains Cleared'
   },
   {
     name: 'Anjali Verma',
     avatar: '👩‍💻',
     rating: 5,
-    text: 'Expert-curated notes saved me months of preparation time. Highly recommend for serious aspirants.',
+    text: 'Scored 94% in GK/GS in UPSSSC PET. The exam-specific strategy was a game changer!',
     exam: 'State PSC Selected'
   },
   {
     name: 'Vikash Singh',
     avatar: '👨‍🏫',
     rating: 5,
-    text: 'Regular content updates keep me ahead of current affairs. The exam analysis feature is brilliant!',
+    text: 'Focused only on GS this time and cracked CTET in the first attempt!',
     exam: 'Railway Exam Qualified'
   },
   {
@@ -42,7 +42,7 @@ const reviews = [
     name: 'Arjun Patel',
     avatar: '👨‍⚖️',
     rating: 5,
-    text: 'Best app for competitive exam preparation. The UI is intuitive and content quality is top-notch.',
+    text: 'Every review is proof that GK/GS success is possible with the right plan.',
     exam: 'UPSC Prelims Cleared'
   }
 ]
@@ -59,7 +59,7 @@ export default function ReviewsSection() {
           viewport={{ once: true }}
         >
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
-            Success <span className="bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">Stories</span>
+            Samadhan GS <br/><span className="bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">Success Stories</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Join thousands of successful aspirants who chose Samadhan GS

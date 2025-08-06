@@ -49,9 +49,6 @@ export default function HeroSection() {
               Master on GK/GS for Government exam with Expert Resources
             </span>
             <br />
-            <span className="text-2xl sm:text-3xl lg:text-4xl text-gray-200">
-              Your Companion for Competitive Exams
-            </span>
           </motion.h1>
           
           <motion.p 
@@ -60,7 +57,7 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            Read. Understand. Crack Exams.
+            Get upto 90% direct question of GK/GS in all MCQ based Government exams like SSC, Railway, Police, State PCS (pre), State and Central one day exam. Read and practice the complete syllabus of GK/GS.
           </motion.p>
 
           <motion.div 
