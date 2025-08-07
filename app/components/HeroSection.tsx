@@ -1,9 +1,15 @@
-
 'use client'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import { useState, useEffect } from 'react';
 
 export default function HeroSection() {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden pt-16">
       {/* Background Animation */}
@@ -50,7 +56,7 @@ export default function HeroSection() {
             </span>
             <br />
           </motion.h1>
-          
+
           <motion.p 
             className="text-xl text-gray-300 mb-8 max-w-2xl"
             initial={{ opacity: 0, y: 20 }}
@@ -74,7 +80,7 @@ export default function HeroSection() {
             >
               Download App
             </motion.a>
-            
+
             {/* Secondary Action Buttons */}
             <motion.div 
               className="flex gap-4 justify-center"
@@ -143,7 +149,7 @@ export default function HeroSection() {
         </motion.div>
       </div>
 
-      
+
     </section>
   )
 }
