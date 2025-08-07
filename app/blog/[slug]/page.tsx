@@ -1,60 +1,12 @@
 
 import { notFound } from 'next/navigation'
-
-// Mock function to get blog by slug
-async function getBlogBySlug(slug: string) {
-  // In real implementation, fetch from Sanity
-  const mockBlogs: { [key: string]: any } = {
-    'upsc-2024-syllabus-changes': {
-      title: 'UPSC 2024: Key Changes in Syllabus You Must Know',
-      content: `
-        <h2>Important Updates in UPSC Syllabus</h2>
-        <p>The UPSC has announced several important changes to the 2024 syllabus...</p>
-        <h3>Prelims Changes</h3>
-        <p>Key modifications in the preliminary examination include...</p>
-        <h3>Mains Changes</h3>
-        <p>The main examination has seen updates in...</p>
-      `,
-      publishedAt: '2024-01-15',
-      category: 'UPSC',
-      readTime: '5 min read'
-    },
-    'ssc-current-affairs-topics': {
-      title: 'Top 10 Current Affairs Topics for SSC Exams',
-      content: `
-        <h2>Essential Current Affairs for SSC</h2>
-        <p>Stay updated with these crucial current affairs topics...</p>
-        <ol>
-          <li>Economic Survey highlights</li>
-          <li>Recent government schemes</li>
-          <li>International relations updates</li>
-        </ol>
-      `,
-      publishedAt: '2024-01-10',
-      category: 'SSC',
-      readTime: '7 min read'
-    },
-    'effective-study-techniques': {
-      title: 'Effective Study Techniques for Government Exams',
-      content: `
-        <h2>Proven Study Methods</h2>
-        <p>These study techniques have helped thousands of aspirants...</p>
-        <h3>Active Recall</h3>
-        <p>The most effective way to study is...</p>
-        <h3>Spaced Repetition</h3>
-        <p>Review content at increasing intervals...</p>
-      `,
-      publishedAt: '2024-01-05',
-      category: 'Study Tips',
-      readTime: '10 min read'
-    }
-  }
-  
-  return mockBlogs[slug] || null
-}
+import { getBlogPost, urlFor } from '../../../lib/sanity'
+import { PortableText } from '@portabletext/react'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export default async function BlogPost({ params }: { params: { slug: string } }) {
-  const blog = await getBlogBySlug(params.slug)
+  const blog = await getBlogPost(params.slug)
   
   if (!blog) {
     notFound()
@@ -63,38 +15,63 @@ export default async function BlogPost({ params }: { params: { slug: string } })
   return (
     <main className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
+        {/* Breadcrumbs */}
+        <div className="flex items-center text-sm text-gray-400 mb-4">
+          <Link href="/blog" className="hover:text-white">Blog</Link>
+          <span className="mx-2">/</span>
+          <span className="text-white">{blog.title}</span>
+        </div>
+
         {/* Header */}
-        <div className="text-center mb-12">
-          <div className="flex items-center justify-center space-x-4 mb-6">
-            <span className="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm">
-              {blog.category}
-            </span>
-            <span className="text-gray-400 text-sm">{blog.readTime}</span>
-          </div>
+        <div className="mb-8">
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">
             {blog.title}
           </h1>
-          <p className="text-gray-300">
-            Published on {new Date(blog.publishedAt).toLocaleDateString()}
-          </p>
+          <div className="flex items-center justify-between">
+            <p className="text-gray-300">
+              Published on {new Date(blog.publishedAt).toLocaleDateString()} by {blog.author.name}
+            </p>
+            <button className="bg-blue-500/20 text-blue-300 px-4 py-2 rounded-lg hover:bg-blue-500/40 transition-colors">
+              Share
+            </button>
+          </div>
         </div>
+
+        {/* Image */}
+        <div className="aspect-video rounded-xl mb-8 relative overflow-hidden">
+          {blog.mainImage && (
+            <Image
+              src={urlFor(blog.mainImage).url()}
+              alt={blog.title}
+              layout="fill"
+              objectFit="cover"
+            />
+          )}
+        </div>
+
+        {/* Summary */}
+        {blog.excerpt && (
+          <div className="bento-card p-6 mb-8">
+            <h2 className="text-2xl font-bold text-white mb-4">Summary</h2>
+            <p className="text-gray-300">{blog.excerpt}</p>
+          </div>
+        )}
 
         {/* Content */}
         <div className="glass-effect rounded-2xl p-8 sm:p-12">
-          <div 
-            className="prose prose-lg prose-invert max-w-none"
-            dangerouslySetInnerHTML={{ __html: blog.content }}
-          />
+          <div className="prose prose-lg prose-invert max-w-none">
+            <PortableText value={blog.body} />
+          </div>
         </div>
 
         {/* Back to blogs */}
         <div className="text-center mt-12">
-          <a 
-            href="/#blog" 
+          <Link 
+            href="/blog" 
             className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors"
           >
             ← Back to all articles
-          </a>
+          </Link>
         </div>
       </div>
     </main>
