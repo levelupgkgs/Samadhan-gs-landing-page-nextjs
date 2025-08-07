@@ -56,6 +56,7 @@ export default function BlogSidebar({ categories, selectedCategory }: BlogSideba
   };
 
   const handleCategoryClick = (categorySlug: string) => {
+    console.log('Clicking category with slug:', categorySlug);
     router.push(`/blog?category=${categorySlug}`);
   };
 

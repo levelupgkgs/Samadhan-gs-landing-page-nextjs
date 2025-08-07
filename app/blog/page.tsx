@@ -8,8 +8,10 @@ import { Suspense } from 'react'
 import { BookOpen, Filter } from 'lucide-react'
 
 export default async function BlogPage({ searchParams }: { searchParams: { category?: string } }) {
+  console.log('BlogPage searchParams:', searchParams);
   const allPosts = await getBlogPosts(searchParams.category)
   const categories = await getCategories()
+  console.log('BlogPage - Posts count:', allPosts?.length, 'Categories count:', categories?.length);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">

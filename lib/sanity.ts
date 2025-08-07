@@ -30,48 +30,105 @@ export function urlFor(source: any) {
 
 // Helper function to fetch blog posts
 export async function getBlogPosts(categorySlug?: string) {
-  const query = categorySlug
-    ? `*[_type == "post" && references(*[_type == "category" && slug.current == $categorySlug]._id)] | order(publishedAt desc) {
+  if (!categorySlug) {
+    const query = `*[_type == "post"] | order(publishedAt desc) {
+      _id,
+      title,
+      slug,
+      publishedAt,
+      excerpt,
+      mainImage,
+      author->{
+        name,
+        image
+      },
+      categories[]->{
         _id,
         title,
+        description,
         slug,
-        publishedAt,
-        excerpt,
-        mainImage,
-        author->{
-          name,
-          image
-        },
-        categories[]->{
+        "parentCategory": parent->{
+          _id,
           title,
           description,
-          "parentCategory": parent->{
-            title,
-            description
-          }
+          slug
         }
-      }`
-    : `*[_type == "post"] | order(publishedAt desc) {
+      }
+    }`;
+    return await client.fetch(query);
+  }
+
+  // First try to get posts that directly reference this category
+  const directQuery = `*[_type == "post" && references(*[_type == "category" && slug.current == $categorySlug]._id)] | order(publishedAt desc) {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    excerpt,
+    mainImage,
+    author->{
+      name,
+      image
+    },
+    categories[]->{
+      _id,
+      title,
+      description,
+      slug,
+      "parentCategory": parent->{
         _id,
         title,
-        slug,
-        publishedAt,
-        excerpt,
-        mainImage,
-        author->{
-          name,
-          image
-        },
-        categories[]->{
-          title,
-          description,
-          "parentCategory": parent->{
-            title,
-            description
-          }
-        }
-      }`;
-  return await client.fetch(query, categorySlug ? { categorySlug } : {});
+        description,
+        slug
+      }
+    }
+  }`;
+
+  // Also try to get posts from subcategories if this is a parent category
+  const subcategoryQuery = `*[_type == "post" && references(*[_type == "category" && parent->slug.current == $categorySlug]._id)] | order(publishedAt desc) {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    excerpt,
+    mainImage,
+    author->{
+      name,
+      image
+    },
+    categories[]->{
+      _id,
+      title,
+      description,
+      slug,
+      "parentCategory": parent->{
+        _id,
+        title,
+        description,
+        slug
+      }
+    }
+  }`;
+
+  const [directPosts, subcategoryPosts] = await Promise.all([
+    client.fetch(directQuery, { categorySlug }),
+    client.fetch(subcategoryQuery, { categorySlug })
+  ]);
+
+  // Combine and deduplicate posts
+  const allPosts = [...directPosts, ...subcategoryPosts];
+  const uniquePosts = allPosts.filter((post, index, self) => 
+    index === self.findIndex(p => p._id === post._id)
+  );
+
+  console.log('BlogPosts query results:', {
+    categorySlug,
+    directPosts: directPosts.length,
+    subcategoryPosts: subcategoryPosts.length,
+    uniquePosts: uniquePosts.length
+  });
+
+  return uniquePosts;
 }
 
 // Helper function to fetch a single blog post
@@ -108,7 +165,7 @@ export async function getBlogPost(slug: string) {
 
 // Helper function to fetch categories
 export async function getCategories() {
-  return await client.fetch(`
+  const result = await client.fetch(`
     *[_type == "category"] | order(title asc) {
       _id,
       title,
@@ -121,5 +178,7 @@ export async function getCategories() {
         description
       }
     }
-  `)
+  `);
+  console.log('Categories query result:', result);
+  return result;
 }
