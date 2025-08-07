@@ -82,7 +82,9 @@ export async function getBlogPosts(categorySlug?: string) {
         }
       }`;
 
-  const result = await client.fetch(query, { categorySlug });
+  // Only pass categorySlug as parameter if it's defined
+  const params = categorySlug ? { categorySlug } : {};
+  const result = await client.fetch(query, params);
   console.log('getBlogPosts result:', result.length, 'posts for category:', categorySlug);
   return result;
 }
