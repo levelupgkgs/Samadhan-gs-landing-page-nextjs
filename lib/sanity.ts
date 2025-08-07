@@ -32,7 +32,8 @@ export function urlFor(source: any) {
 export async function getBlogPosts(categorySlug?: string) {
   console.log('getBlogPosts called with categorySlug:', categorySlug);
 
-  const query = categorySlug
+  // If categorySlug is provided, filter by it; otherwise get all posts
+  const query = categorySlug && categorySlug !== 'undefined'
     ? `*[_type == "post" && references(*[_type == "category" && slug.current == $categorySlug]._id)] | order(publishedAt desc) {
         _id,
         title,
@@ -82,8 +83,8 @@ export async function getBlogPosts(categorySlug?: string) {
         }
       }`;
 
-  // Only pass categorySlug as parameter if it's defined
-  const params = categorySlug ? { categorySlug } : {};
+  // Only pass categorySlug as parameter if it's defined and not 'undefined'
+  const params = (categorySlug && categorySlug !== 'undefined') ? { categorySlug } : {};
   const result = await client.fetch(query, params);
   console.log('getBlogPosts result:', result.length, 'posts for category:', categorySlug);
   return result;
