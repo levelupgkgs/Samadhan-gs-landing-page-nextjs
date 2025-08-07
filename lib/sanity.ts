@@ -30,6 +30,8 @@ export function urlFor(source: any) {
 
 // Helper function to fetch blog posts
 export async function getBlogPosts(categorySlug?: string) {
+  console.log('getBlogPosts called with categorySlug:', categorySlug);
+  
   if (!categorySlug) {
     const query = `*[_type == "post"] | order(publishedAt desc) {
       _id,
@@ -55,11 +57,24 @@ export async function getBlogPosts(categorySlug?: string) {
         }
       }
     }`;
-    return await client.fetch(query);
+    const result = await client.fetch(query);
+    console.log('All posts fetched:', result.length);
+    return result;
   }
 
-  // First try to get posts that directly reference this category
-  const directQuery = `*[_type == "post" && references(*[_type == "category" && slug.current == $categorySlug]._id)] | order(publishedAt desc) {
+  // Let's first check what categories exist
+  const categoryCheck = await client.fetch(`
+    *[_type == "category"] {
+      _id,
+      title,
+      slug,
+      "posts": *[_type == "post" && references(^._id)]
+    }
+  `);
+  console.log('Category check:', categoryCheck);
+
+  // Try a more comprehensive query that covers all possible matches
+  const query = `*[_type == "post" && count(categories[@->slug.current == $categorySlug || @->parent->slug.current == $categorySlug]) > 0] | order(publishedAt desc) {
     _id,
     title,
     slug,
@@ -84,51 +99,84 @@ export async function getBlogPosts(categorySlug?: string) {
     }
   }`;
 
-  // Also try to get posts from subcategories if this is a parent category
-  const subcategoryQuery = `*[_type == "post" && references(*[_type == "category" && parent->slug.current == $categorySlug]._id)] | order(publishedAt desc) {
-    _id,
-    title,
-    slug,
-    publishedAt,
-    excerpt,
-    mainImage,
-    author->{
-      name,
-      image
-    },
-    categories[]->{
-      _id,
-      title,
-      description,
-      slug,
-      "parentCategory": parent->{
-        _id,
-        title,
-        description,
-        slug
-      }
-    }
-  }`;
-
-  const [directPosts, subcategoryPosts] = await Promise.all([
-    client.fetch(directQuery, { categorySlug }),
-    client.fetch(subcategoryQuery, { categorySlug })
-  ]);
-
-  // Combine and deduplicate posts
-  const allPosts = [...directPosts, ...subcategoryPosts];
-  const uniquePosts = allPosts.filter((post, index, self) => 
-    index === self.findIndex(p => p._id === post._id)
-  );
-
-  console.log('BlogPosts query results:', {
+  const result = await client.fetch(query, { categorySlug });
+  
+  console.log('Filtered posts query result:', {
     categorySlug,
-    directPosts: directPosts.length,
-    subcategoryPosts: subcategoryPosts.length,
-    uniquePosts: uniquePosts.length
+    postsFound: result.length,
+    posts: result
   });
 
-  return uniquePosts;
+  // If no results, try alternative queries
+  if (result.length === 0) {
+    console.log('No results found, trying alternative queries...');
+    
+    // Try simpler direct reference query
+    const simpleQuery = `*[_type == "post" && references(*[_type == "category" && slug.current == $categorySlug]._id)] | order(publishedAt desc) {
+      _id,
+      title,
+      slug,
+      publishedAt,
+      excerpt,
+      mainImage,
+      author->{
+        name,
+        image
+      },
+      categories[]->{
+        _id,
+        title,
+        description,
+        slug,
+        "parentCategory": parent->{
+          _id,
+          title,
+          description,
+          slug
+        }
+      }
+    }`;
+
+    const simpleResult = await client.fetch(simpleQuery, { categorySlug });
+    console.log('Simple query result:', simpleResult.length, 'posts');
+    
+    if (simpleResult.length > 0) {
+      return simpleResult;
+    }
+
+    // Try even simpler query by category title
+    const titleQuery = `*[_type == "post" && count(categories[@->title match $categoryTitle]) > 0] | order(publishedAt desc) {
+      _id,
+      title,
+      slug,
+      publishedAt,
+      excerpt,
+      mainImage,
+      author->{
+        name,
+        image
+      },
+      categories[]->{
+        _id,
+        title,
+        description,
+        slug,
+        "parentCategory": parent->{
+          _id,
+          title,
+          description,
+          slug
+        }
+      }
+    }`;
+
+    const titleResult = await client.fetch(titleQuery, { categoryTitle: categorySlug });
+    console.log('Title query result:', titleResult.length, 'posts');
+    
+    return titleResult;
+  }
+
+  return result;
 }
 
 // Helper function to fetch a single blog post
@@ -180,5 +228,29 @@ export async function getCategories() {
     }
   `);
   console.log('Categories query result:', result);
+  console.log('Sample category structure:', result?.[0]);
+  return result;
+}
+
+// Helper function to get all posts with their categories for debugging
+export async function getAllPostsWithCategories() {
+  const result = await client.fetch(`
+    *[_type == "post"] | order(publishedAt desc) {
+      _id,
+      title,
+      slug,
+      categories[]->{
+        _id,
+        title,
+        slug,
+        "parentCategory": parent->{
+          _id,
+          title,
+          slug
+        }
+      }
+    }
+  `);
+  console.log('All posts with categories:', result);
   return result;
 }
