@@ -1,0 +1,69 @@
+getBlogPosts called with categorySlug: undefined
+getBlogPosts called with categorySlug: undefined
+ ⨯ Internal error: Error: Unable to parse value of "$categorySlug=undefined". Please quote string values.
+    at onResponse (./node_modules/@sanity/client/dist/index.browser.js:128:13)
+    at eval (./node_modules/get-it/dist/_chunks-es/createRequester.js:6:751)
+    at eval (./node_modules/get-it/dist/_chunks-es/createRequester.js:6:968)
+    at eval (./node_modules/get-it/dist/_chunks-es/createRequester.js:6:1077)
+    at eval (./node_modules/get-it/dist/index.react-server.js:9:2787)
+    at c.onreadystatechange (./node_modules/get-it/dist/index.react-server.js:9:2990)
+    at eval (./node_modules/get-it/dist/index.react-server.js:9:1586)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+digest: "1997891329"
+ ⨯ Internal error: Error: Unable to parse value of "$categorySlug=undefined". Please quote string values.
+    at onResponse (./node_modules/@sanity/client/dist/index.browser.js:128:13)
+    at eval (./node_modules/get-it/dist/_chunks-es/createRequester.js:6:751)
+    at eval (./node_modules/get-it/dist/_chunks-es/createRequester.js:6:968)
+    at eval (./node_modules/get-it/dist/_chunks-es/createRequester.js:6:1077)
+    at eval (./node_modules/get-it/dist/index.react-server.js:9:2787)
+    at c.onreadystatechange (./node_modules/get-it/dist/index.react-server.js:9:2990)
+    at eval (./node_modules/get-it/dist/index.react-server.js:9:1586)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+digest: "1997891329"
+ ⨯ Internal error: Error: Unable to parse value of "$categorySlug=undefined". Please quote string values.
+    at onResponse (./node_modules/@sanity/client/dist/index.browser.js:128:13)
+    at eval (./node_modules/get-it/dist/_chunks-es/createRequester.js:6:751)
+    at eval (./node_modules/get-it/dist/_chunks-es/createRequester.js:6:968)
+    at eval (./node_modules/get-it/dist/_chunks-es/createRequester.js:6:1077)
+    at eval (./node_modules/get-it/dist/index.react-server.js:9:2787)
+    at c.onreadystatechange (./node_modules/get-it/dist/index.react-server.js:9:2990)
+    at eval (./node_modules/get-it/dist/index.react-server.js:9:1586)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+digest: "1997891329"
+ ⨯ Internal error: Error: Unable to parse value of "$categorySlug=undefined". Please quote string values.
+    at onResponse (./node_modules/@sanity/client/dist/index.browser.js:128:13)
+    at eval (./node_modules/get-it/dist/_chunks-es/createRequester.js:6:751)
+    at eval (./node_modules/get-it/dist/_chunks-es/createRequester.js:6:968)
+    at eval (./node_modules/get-it/dist/_chunks-es/createRequester.js:6:1077)
+    at eval (./node_modules/get-it/dist/index.react-server.js:9:2787)
+    at c.onreadystatechange (./node_modules/get-it/dist/index.react-server.js:9:2990)
+    at eval (./node_modules/get-it/dist/index.react-server.js:9:1586)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+digest: "1997891329"
+ GET / 500 in 11268ms
+ GET / 500 in 4190ms
+ ✓ Compiled in 1014ms (897 modules)
+ ⚠ Cross origin request detected from 9f1bb8c9-ad86-43fd-ab20-5ccb7c3cb633-00-1li7brh80dz5f.sisko.replit.dev to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+getBlogPosts called with categorySlug: undefined
+ ⨯ Internal error: Error: Unable to parse value of "$categorySlug=undefined". Please quote string values.
+    at onResponse (./node_modules/@sanity/client/dist/index.browser.js:128:13)
+    at eval (./node_modules/get-it/dist/_chunks-es/createRequester.js:6:751)
+    at eval (./node_modules/get-it/dist/_chunks-es/createRequester.js:6:968)
+    at eval (./node_modules/get-it/dist/_chunks-es/createRequester.js:6:1077)
+    at eval (./node_modules/get-it/dist/index.react-server.js:9:2787)
+    at c.onreadystatechange (./node_modules/get-it/dist/index.react-server.js:9:2990)
+    at eval (./node_modules/get-it/dist/index.react-server.js:9:1586)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+digest: "1997891329"
+ ⨯ Internal error: Error: Unable to parse value of "$categorySlug=undefined". Please quote string values.
+    at onResponse (./node_modules/@sanity/client/dist/index.browser.js:128:13)
+    at eval (./node_modules/get-it/dist/_chunks-es/createRequester.js:6:751)
+    at eval (./node_modules/get-it/dist/_chunks-es/createRequester.js:6:968)
+    at eval (./node_modules/get-it/dist/_chunks-es/createRequester.js:6:1077)
+    at eval (./node_modules/get-it/dist/index.react-server.js:9:2787)
+    at c.onreadystatechange (./node_modules/get-it/dist/index.react-server.js:9:2990)
+    at eval (./node_modules/get-it/dist/index.react-server.js:9:1586)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+digest: "1997891329"
+ GET / 500 in 77ms
