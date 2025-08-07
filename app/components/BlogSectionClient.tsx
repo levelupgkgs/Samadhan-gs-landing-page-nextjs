@@ -119,7 +119,7 @@ export default function BlogSectionClient({ posts }: { posts: any[] }) {
                   {post.categories && post.categories.length > 0 && (
                     <div className="flex flex-wrap gap-2 mb-3">
                       {post.categories.slice(0, 2).map((category, catIndex) => (
-                        <span key={`${post._id}-category-${catIndex}`} className="px-2 py-1 bg-blue-500/20 text-blue-300 border border-blue-500/30 rounded-lg text-xs font-medium">
+                        <span key={`${post._id}-category-${category._id || catIndex}`} className="px-2 py-1 bg-blue-500/20 text-blue-300 border border-blue-500/30 rounded-lg text-xs font-medium">
                           {category.title}
                         </span>
                       ))}
