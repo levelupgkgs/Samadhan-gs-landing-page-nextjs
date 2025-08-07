@@ -62,19 +62,28 @@ export async function getBlogPosts(categorySlug?: string) {
     return result;
   }
 
-  // Let's first check what categories exist
-  const categoryCheck = await client.fetch(`
-    *[_type == "category"] {
-      _id,
-      title,
-      slug,
-      "posts": *[_type == "post" && references(^._id)]
-    }
-  `);
-  console.log('Category check:', categoryCheck);
+  // First, let's get the category ID for the given slug
+  const categoryQuery = `*[_type == "category" && slug.current == $categorySlug][0]{
+    _id,
+    title,
+    slug,
+    "childCategories": *[_type == "category" && parent._ref == ^._id]._id
+  }`;
+  
+  const category = await client.fetch(categoryQuery, { categorySlug });
+  console.log('Found category:', category);
 
-  // Try a more comprehensive query that covers all possible matches
-  const query = `*[_type == "post" && count(categories[@->slug.current == $categorySlug || @->parent->slug.current == $categorySlug]) > 0] | order(publishedAt desc) {
+  if (!category) {
+    console.log('No category found with slug:', categorySlug);
+    return [];
+  }
+
+  // Get all category IDs to search for (parent + children)
+  const categoryIds = [category._id, ...(category.childCategories || [])];
+  console.log('Searching for posts in categories:', categoryIds);
+
+  // Search for posts that reference any of these categories
+  const postsQuery = `*[_type == "post" && count(categories[@._ref in $categoryIds]) > 0] | order(publishedAt desc) {
     _id,
     title,
     slug,
@@ -99,83 +108,9 @@ export async function getBlogPosts(categorySlug?: string) {
     }
   }`;
 
-  const result = await client.fetch(query, { categorySlug });
+  const result = await client.fetch(postsQuery, { categoryIds });
+  console.log('Posts found for category:', result.length);
   
-  console.log('Filtered posts query result:', {
-    categorySlug,
-    postsFound: result.length,
-    posts: result
-  });
-
-  // If no results, try alternative queries
-  if (result.length === 0) {
-    console.log('No results found, trying alternative queries...');
-    
-    // Try simpler direct reference query
-    const simpleQuery = `*[_type == "post" && references(*[_type == "category" && slug.current == $categorySlug]._id)] | order(publishedAt desc) {
-      _id,
-      title,
-      slug,
-      publishedAt,
-      excerpt,
-      mainImage,
-      author->{
-        name,
-        image
-      },
-      categories[]->{
-        _id,
-        title,
-        description,
-        slug,
-        "parentCategory": parent->{
-          _id,
-          title,
-          description,
-          slug
-        }
-      }
-    }`;
-
-    const simpleResult = await client.fetch(simpleQuery, { categorySlug });
-    console.log('Simple query result:', simpleResult.length, 'posts');
-    
-    if (simpleResult.length > 0) {
-      return simpleResult;
-    }
-
-    // Try even simpler query by category title
-    const titleQuery = `*[_type == "post" && count(categories[@->title match $categoryTitle]) > 0] | order(publishedAt desc) {
-      _id,
-      title,
-      slug,
-      publishedAt,
-      excerpt,
-      mainImage,
-      author->{
-        name,
-        image
-      },
-      categories[]->{
-        _id,
-        title,
-        description,
-        slug,
-        "parentCategory": parent->{
-          _id,
-          title,
-          description,
-          slug
-        }
-      }
-    }`;
-
-    const titleResult = await client.fetch(titleQuery, { categoryTitle: categorySlug });
-    console.log('Title query result:', titleResult.length, 'posts');
-    
-    return titleResult;
-  }
-
   return result;
 }
 
