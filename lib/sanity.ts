@@ -31,86 +31,59 @@ export function urlFor(source: any) {
 // Helper function to fetch blog posts
 export async function getBlogPosts(categorySlug?: string) {
   console.log('getBlogPosts called with categorySlug:', categorySlug);
-  
-  if (!categorySlug) {
-    const query = `*[_type == "post"] | order(publishedAt desc) {
-      _id,
-      title,
-      slug,
-      publishedAt,
-      excerpt,
-      mainImage,
-      author->{
-        name,
-        image
-      },
-      categories[]->{
+
+  const query = categorySlug
+    ? `*[_type == "post" && references(*[_type == "category" && slug.current == $categorySlug]._id)] | order(publishedAt desc) {
         _id,
         title,
-        description,
         slug,
-        "parentCategory": parent->{
+        publishedAt,
+        excerpt,
+        mainImage,
+        author->{
+          name,
+          image
+        },
+        categories[]->{
           _id,
           title,
           description,
-          slug
+          slug,
+          "parentCategory": parent->{
+            _id,
+            title,
+            description,
+            slug
+          }
         }
-      }
-    }`;
-    const result = await client.fetch(query);
-    console.log('All posts fetched:', result.length);
-    return result;
-  }
-
-  // First, let's get the category ID for the given slug
-  const categoryQuery = `*[_type == "category" && slug.current == $categorySlug][0]{
-    _id,
-    title,
-    slug,
-    "childCategories": *[_type == "category" && parent._ref == ^._id]._id
-  }`;
-  
-  const category = await client.fetch(categoryQuery, { categorySlug });
-  console.log('Found category:', category);
-
-  if (!category) {
-    console.log('No category found with slug:', categorySlug);
-    return [];
-  }
-
-  // Get all category IDs to search for (parent + children)
-  const categoryIds = [category._id, ...(category.childCategories || [])];
-  console.log('Searching for posts in categories:', categoryIds);
-
-  // Search for posts that reference any of these categories
-  const postsQuery = `*[_type == "post" && count(categories[@._ref in $categoryIds]) > 0] | order(publishedAt desc) {
-    _id,
-    title,
-    slug,
-    publishedAt,
-    excerpt,
-    mainImage,
-    author->{
-      name,
-      image
-    },
-    categories[]->{
-      _id,
-      title,
-      description,
-      slug,
-      "parentCategory": parent->{
+      }`
+    : `*[_type == "post"] | order(publishedAt desc) {
         _id,
         title,
-        description,
-        slug
-      }
-    }
-  }`;
+        slug,
+        publishedAt,
+        excerpt,
+        mainImage,
+        author->{
+          name,
+          image
+        },
+        categories[]->{
+          _id,
+          title,
+          description,
+          slug,
+          "parentCategory": parent->{
+            _id,
+            title,
+            description,
+            slug
+          }
+        }
+      }`;
 
-  const result = await client.fetch(postsQuery, { categoryIds });
-  console.log('Posts found for category:', result.length);
-  
+  const result = await client.fetch(query, { categorySlug });
+  console.log('getBlogPosts result:', result.length, 'posts for category:', categorySlug);
   return result;
 }
 
@@ -163,7 +136,6 @@ export async function getCategories() {
     }
   `);
   console.log('Categories query result:', result);
-  console.log('Sample category structure:', result?.[0]);
   return result;
 }
 

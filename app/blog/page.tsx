@@ -1,5 +1,5 @@
 
-import { getBlogPosts, getCategories, getAllPostsWithCategories } from '../../lib/sanity'
+import { getBlogPosts, getCategories } from '../../lib/sanity'
 import BlogSidebar from '../components/BlogSidebar'
 import BlogList from '../components/BlogList'
 import Navigation from '../components/Navigation'
@@ -9,9 +9,6 @@ import { BookOpen, Filter } from 'lucide-react'
 
 export default async function BlogPage({ searchParams }: { searchParams: { category?: string } }) {
   console.log('BlogPage searchParams:', searchParams);
-  
-  // Debug: Get all posts with categories to understand the structure
-  const debugPosts = await getAllPostsWithCategories();
   
   const allPosts = await getBlogPosts(searchParams.category)
   const categories = await getCategories()

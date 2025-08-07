@@ -28,83 +28,83 @@ export default function BlogList({ blogs }) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {blogs.map((blog, index) => (
+      {blogs.map((post, index) => (
         <motion.div
-          key={blog._id}
-          className="group"
+          key={post._id}
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: index * 0.1 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: index * 0.1 }}
+          className="group"
         >
-          <Link href={`/blog/${blog.slug.current}`}>
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden border border-white/10 hover:bg-white/15 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl h-full flex flex-col">
-              {/* Image */}
-              <div className="aspect-video relative overflow-hidden">
-                {blog.mainImage ? (
-                  <Image
-                    src={urlFor(blog.mainImage).url()}
-                    alt={blog.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center">
-                    <span className="text-4xl opacity-50">📰</span>
-                  </div>
-                )}
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10 shadow-xl hover:shadow-2xl hover:bg-white/15 transition-all duration-300 hover:scale-105 h-full flex flex-col">
+            {post.mainImage && (
+              <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden">
+                <Image
+                  src={urlFor(post.mainImage).width(400).height(240).url()}
+                  alt={post.mainImage.alt || post.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
               </div>
-              
-              {/* Content */}
-              <div className="p-6 flex-grow flex flex-col">
-                {/* Categories and Date */}
-                <div className="flex items-center justify-between mb-3">
-                  {blog.categories && blog.categories.length > 0 && (
-                    <span className="text-xs bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-300 px-3 py-1 rounded-full border border-blue-500/30 font-medium">
-                      {blog.categories[0].title}
-                    </span>
-                  )}
-                  <div className="flex items-center text-xs text-gray-400">
-                    <Calendar className="w-3 h-3 mr-1" />
-                    <span>{format(new Date(blog.publishedAt), 'MMM dd, yyyy')}</span>
-                  </div>
-                </div>
+            )}
 
-                {/* Title */}
-                <h3 className="font-bold text-white mb-3 group-hover:text-blue-300 transition-colors line-clamp-2 text-lg leading-tight">
-                  {blog.title}
-                </h3>
-                
-                {/* Excerpt */}
-                <p className="text-gray-300 text-sm line-clamp-3 flex-grow mb-4 leading-relaxed">
-                  {blog.excerpt}
-                </p>
-                
-                {/* Meta and CTA */}
-                <div className="flex items-center justify-between pt-4 border-t border-white/10">
-                  <div className="flex items-center text-xs text-gray-400 gap-4">
-                    {blog.author && (
-                      <div className="flex items-center">
-                        <User className="w-3 h-3 mr-1" />
-                        <span>{blog.author.name}</span>
-                      </div>
-                    )}
-                    <div className="flex items-center">
-                      <Clock className="w-3 h-3 mr-1" />
-                      <span>5 min read</span>
-                    </div>
-                  </div>
-                  
-                  <div className="text-blue-400 text-sm font-medium group-hover:text-blue-300 transition-colors flex items-center">
-                    Read More
-                    <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </div>
+            <div className="flex-1 flex flex-col">
+              {/* Categories */}
+              {post.categories && post.categories.length > 0 && (
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {post.categories.slice(0, 2).map((category, catIndex) => (
+                    <span 
+                      key={`${post._id}-category-${category._id || catIndex}`} 
+                      className="px-3 py-1 bg-blue-500/20 text-blue-300 border border-blue-500/30 rounded-full text-xs font-medium"
+                    >
+                      {category.parentCategory ? `${category.parentCategory.title} > ${category.title}` : category.title}
+                    </span>
+                  ))}
                 </div>
+              )}
+
+              {/* Meta info */}
+              <div className="flex items-center gap-3 text-sm text-slate-400 mb-4">
+                <div className="flex items-center gap-1">
+                  <Calendar className="w-4 h-4" />
+                  <span className="text-slate-300">
+                    {format(new Date(post.publishedAt), 'MMM dd, yyyy')}
+                  </span>
+                </div>
+                {post.author && (
+                  <>
+                    <span>•</span>
+                    <div className="flex items-center gap-1">
+                      <User className="w-4 h-4" />
+                      <span className="text-slate-300">{post.author.name}</span>
+                    </div>
+                  </>
+                )}
               </div>
+
+              {/* Title */}
+              <h3 className="text-xl font-bold text-slate-100 mb-3 group-hover:text-blue-300 transition-colors line-clamp-2 leading-tight">
+                {post.title}
+              </h3>
+
+              {/* Excerpt */}
+              {post.excerpt && (
+                <p className="text-slate-300 text-sm line-clamp-3 mb-6 leading-relaxed flex-1">
+                  {post.excerpt}
+                </p>
+              )}
+
+              {/* Read More Button */}
+              <Link 
+                href={`/blog/${post.slug.current}`}
+                className="inline-flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-medium rounded-xl transition-all duration-300 group-hover:shadow-lg group-hover:shadow-blue-500/25 mt-auto"
+              >
+                Read More
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </div>
-          </Link>
+          </div>
         </motion.div>
       ))}
     </div>
