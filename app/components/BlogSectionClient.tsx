@@ -103,7 +103,9 @@ export default function BlogSectionClient({ posts }: { posts: any[] }) {
                   <div className="flex items-center gap-3 text-sm text-slate-400 mb-4">
                     <div className="flex items-center gap-1">
                       <Calendar className="w-4 h-4" />
-                      <span className="text-slate-300">{format(new Date(post.publishedAt), 'MMM dd, yyyy')}</span>
+                      <span className="text-slate-300">
+                        {isClient ? format(new Date(post.publishedAt), 'MMM dd, yyyy') : 'Loading...'}
+                      </span>
                     </div>
                     {post.author && (
                       <>
