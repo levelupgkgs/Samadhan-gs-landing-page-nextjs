@@ -76,7 +76,7 @@ export default function BlogPostSidebar({ allPosts, categories, currentSlug }: B
         {/* All Posts Link */}
         <Link href="/blog" className="
           flex items-center gap-3 p-3 rounded-xl transition-all duration-300 group
-          text-slate-300 hover:bg-white/10 hover:text-white
+          text-white hover:bg-white/10
         ">
           <BookOpen className="w-4 h-4" />
           <span className="font-medium">All Articles</span>
@@ -93,11 +93,11 @@ export default function BlogPostSidebar({ allPosts, categories, currentSlug }: B
               <div className="flex items-center">
                 <button
                   onClick={() => toggleCategory(category._id)}
-                  className="flex items-center gap-3 p-3 rounded-xl transition-all duration-300 group flex-1 text-slate-300 hover:bg-white/10 hover:text-white"
+                  className="flex items-center gap-3 p-3 rounded-xl transition-all duration-300 group flex-1 text-white hover:bg-white/10"
                 >
                   <Tag className="w-4 h-4" />
                   <span className="font-medium flex-1 text-left">{category.title}</span>
-                  <span className="text-xs bg-blue-500/20 px-2 py-1 rounded-full">
+                  <span className="text-xs bg-blue-500/30 text-blue-200 px-2 py-1 rounded-full">
                     {categoryPosts.length}
                   </span>
                   {isExpanded ? (
@@ -120,7 +120,7 @@ export default function BlogPostSidebar({ allPosts, categories, currentSlug }: B
                         flex items-start gap-3 p-3 rounded-lg transition-all duration-300 group text-sm
                         ${currentSlug === post.slug.current
                           ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg'
-                          : 'text-slate-300 hover:bg-white/10 hover:text-white'
+                          : 'text-white hover:bg-white/10'
                         }
                       `}
                     >
@@ -150,11 +150,11 @@ export default function BlogPostSidebar({ allPosts, categories, currentSlug }: B
                       <div key={subCategory._id} className="space-y-1">
                         <button
                           onClick={() => toggleCategory(subCategory._id)}
-                          className="flex items-center gap-2 p-2 rounded-lg transition-all duration-300 group text-sm text-slate-400 hover:bg-white/10 hover:text-white w-full"
+                          className="flex items-center gap-2 p-2 rounded-lg transition-all duration-300 group text-sm text-white hover:bg-white/10 w-full"
                         >
                           <ChevronRight className={`w-4 h-4 transition-transform ${isSubExpanded ? 'rotate-90' : ''}`} />
                           <span className="flex-1 text-left">{subCategory.title}</span>
-                          <span className="text-xs bg-purple-500/20 px-2 py-1 rounded-full">
+                          <span className="text-xs bg-purple-500/30 text-purple-200 px-2 py-1 rounded-full">
                             {subCategoryPosts.length}
                           </span>
                         </button>
@@ -170,7 +170,7 @@ export default function BlogPostSidebar({ allPosts, categories, currentSlug }: B
                                   flex items-start gap-2 p-2 rounded-lg transition-all duration-300 group text-xs
                                   ${currentSlug === post.slug.current
                                     ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg'
-                                    : 'text-slate-400 hover:bg-white/10 hover:text-white'
+                                    : 'text-white hover:bg-white/10'
                                   }
                                 `}
                               >
@@ -204,7 +204,7 @@ export default function BlogPostSidebar({ allPosts, categories, currentSlug }: B
         {/* Standalone posts without categories */}
         {allPosts?.filter(post => !post.categories || post.categories.length === 0).length > 0 && (
           <div className="space-y-1">
-            <div className="text-slate-400 text-sm font-medium px-3 py-2">Uncategorized</div>
+            <div className="text-white text-sm font-medium px-3 py-2">Uncategorized</div>
             {allPosts
               .filter(post => !post.categories || post.categories.length === 0)
               .map((post) => (
@@ -215,7 +215,7 @@ export default function BlogPostSidebar({ allPosts, categories, currentSlug }: B
                     flex items-start gap-3 p-3 rounded-lg transition-all duration-300 group text-sm
                     ${currentSlug === post.slug.current
                       ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg'
-                      : 'text-slate-300 hover:bg-white/10 hover:text-white'
+                      : 'text-white hover:bg-white/10'
                     }
                   `}
                 >

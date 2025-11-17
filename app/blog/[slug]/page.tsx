@@ -124,8 +124,53 @@ export default async function BlogPost({ params }: { params: { slug: string } })
     notFound()
   }
 
+  // Get related posts from the same category
+  const relatedPosts = allPosts?.filter(post =>
+    post.slug.current !== params.slug && // Exclude current post
+    post.categories?.some(cat =>
+      blog.categories?.some(blogCat => blogCat._id === cat._id)
+    )
+  ).slice(0, 3) || [] // Limit to 3 related posts
+
+  // Structured data for Google EEAT (Experience, Expertise, Authoritativeness, Trustworthiness)
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": blog.title,
+    "description": blog.excerpt || blog.title,
+    "image": blog.mainImage ? urlFor(blog.mainImage).url() : "",
+    "datePublished": blog.publishedAt,
+    "dateModified": blog.publishedAt,
+    "author": {
+      "@type": "Person",
+      "name": blog.author?.name || "Samadhan GS Team",
+      "description": blog.author?.bio || "Expert in competitive exam preparation",
+      "image": blog.author?.image ? urlFor(blog.author.image).url() : ""
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Samadhan GS",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://samadhangs.com/logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://samadhangs.com/blog/${params.slug}`
+    },
+    "articleSection": blog.categories?.[0]?.title || "General",
+    "keywords": blog.categories?.map(cat => cat.title).join(", ") || "competitive exams, UPSC, SSC"
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+
       <Navigation />
 
       <main className="py-20 px-4 sm:px-6 lg:px-8">
@@ -286,6 +331,76 @@ export default async function BlogPost({ params }: { params: { slug: string } })
               Explore More Articles
             </Link>
           </div>
+
+          {/* Related Posts Section */}
+          {relatedPosts.length > 0 && (
+            <div className="mt-12">
+              <div className="mb-6">
+                <h2 className="text-3xl font-bold text-white mb-2">Related Articles</h2>
+                <p className="text-gray-300">Continue reading articles from the same category</p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {relatedPosts.map((post) => (
+                  <Link
+                    key={post._id}
+                    href={`/blog/${post.slug.current}`}
+                    className="group bg-white/10 backdrop-blur-md rounded-2xl overflow-hidden border border-white/10 hover:border-blue-400/50 transition-all duration-300 hover:shadow-xl hover:scale-105"
+                  >
+                    {post.mainImage && (
+                      <div className="aspect-video relative overflow-hidden">
+                        <Image
+                          src={urlFor(post.mainImage).url()}
+                          alt={post.title}
+                          fill
+                          className="object-cover group-hover:scale-110 transition-transform duration-300"
+                        />
+                      </div>
+                    )}
+
+                    <div className="p-6">
+                      {/* Categories */}
+                      {post.categories && post.categories.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mb-3">
+                          {post.categories.slice(0, 2).map((category, index) => (
+                            <span
+                              key={`${category._id || index}`}
+                              className="px-2 py-1 bg-blue-500/20 text-blue-300 border border-blue-500/30 rounded-full text-xs font-medium"
+                            >
+                              {category.title}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+
+                      <h3 className="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-blue-300 transition-colors">
+                        {post.title}
+                      </h3>
+
+                      {post.excerpt && (
+                        <p className="text-gray-400 text-sm mb-4 line-clamp-2">
+                          {post.excerpt}
+                        </p>
+                      )}
+
+                      <div className="flex items-center gap-4 text-sm text-gray-400">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="w-4 h-4" />
+                          <span>{format(new Date(post.publishedAt), 'MMM dd, yyyy')}</span>
+                        </div>
+                        {post.author && (
+                          <div className="flex items-center gap-1">
+                            <User className="w-4 h-4" />
+                            <span>{post.author.name}</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
         </article>
 
         {/* Sidebar */}
