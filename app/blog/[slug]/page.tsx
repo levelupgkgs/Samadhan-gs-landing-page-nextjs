@@ -1,13 +1,15 @@
 
 import { notFound } from 'next/navigation'
-import { getBlogPost, urlFor } from '../../../lib/sanity'
+import { getBlogPost, urlFor, getCategories } from '../../../lib/sanity'
 import { PortableText } from '@portabletext/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import Navigation from '../../components/Navigation'
 import Footer from '../../components/Footer'
+import BlogSidebar from '../../components/BlogSidebar'
 import { format } from 'date-fns'
 import { Calendar, User, ArrowLeft, Clock, BookOpen } from 'lucide-react'
+import { Suspense } from 'react'
 
 // Custom PortableText components for better rendering
 const portableTextComponents = {
@@ -115,17 +117,24 @@ const portableTextComponents = {
 
 export default async function BlogPost({ params }: { params: { slug: string } }) {
   const blog = await getBlogPost(params.slug)
+  const categories = await getCategories()
 
   if (!blog) {
     notFound()
   }
+
+  // Get the current blog's category slug for sidebar highlighting
+  const currentCategorySlug = blog.categories?.[0]?.slug?.current
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
       <Navigation />
 
       <main className="py-20 px-4 sm:px-6 lg:px-8">
-        <article className="max-w-5xl mx-auto">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            {/* Main Article Content */}
+            <article className="lg:col-span-3 order-2 lg:order-1">
           {/* Back Button */}
           <div className="mb-8">
             <Link
@@ -280,6 +289,26 @@ export default async function BlogPost({ params }: { params: { slug: string } })
             </Link>
           </div>
         </article>
+
+        {/* Sidebar */}
+        <aside className="lg:col-span-1 order-1 lg:order-2">
+          <Suspense fallback={
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10 sticky top-6">
+              <div className="animate-pulse">
+                <div className="h-8 bg-white/20 rounded mb-4"></div>
+                <div className="space-y-3">
+                  {[1,2,3,4,5].map(i => (
+                    <div key={i} className="h-10 bg-white/10 rounded"></div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          }>
+            <BlogSidebar categories={categories} selectedCategory={currentCategorySlug} />
+          </Suspense>
+        </aside>
+      </div>
+        </div>
       </main>
 
       <Footer />
