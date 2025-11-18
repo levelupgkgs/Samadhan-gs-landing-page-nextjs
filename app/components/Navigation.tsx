@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation'
 import { X } from 'lucide-react'
 
 const navItems = [
-  { name: 'Home', href: '/', isSection: false },
+  { name: 'Home', href: '#home', isSection: true },
   { name: 'Features', href: '#features', isSection: true },
   { name: 'Reviews', href: '#reviews', isSection: true },
   { name: 'Blog', href: '/blog', isSection: false },
@@ -28,20 +28,27 @@ export default function Navigation() {
       // Only track sections on home page
       if (isHomePage) {
         const sections = navItems.filter(item => item.isSection).map(item => item.href.slice(1))
+        const scrollPosition = window.scrollY + 100 // Account for fixed nav
+
+        // Find the current section based on scroll position
+        let currentSection = 'home'
+
         for (const section of sections) {
           const element = document.getElementById(section)
           if (element) {
-            const rect = element.getBoundingClientRect()
-            if (rect.top <= 100 && rect.bottom >= 100) {
-              setActiveSection(section)
-              break
+            const offsetTop = element.offsetTop - 80 // Account for nav height
+            if (scrollPosition >= offsetTop) {
+              currentSection = section
             }
           }
         }
+
+        setActiveSection(currentSection)
       }
     }
 
     window.addEventListener('scroll', handleScroll)
+    handleScroll() // Call once on mount to set initial state
     return () => window.removeEventListener('scroll', handleScroll)
   }, [isHomePage])
 

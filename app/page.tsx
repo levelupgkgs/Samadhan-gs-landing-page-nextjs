@@ -9,35 +9,38 @@ import Footer from './components/Footer'
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-slate-900">
       <Navigation />
 
-      {/* Hero Section - Deep blue to purple gradient */}
-      <section id="home" className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900">
+      {/* Hero Section - Deep blue gradient */}
+      <section id="home" className="bg-gradient-to-b from-slate-900 via-blue-950 to-slate-900 scroll-mt-16">
         <HeroSection />
       </section>
 
-      {/* Features Section - Purple to pink gradient */}
-      <section id="features" className="bg-gradient-to-br from-indigo-900 via-purple-900 to-fuchsia-900">
+      {/* Features Section - Subtle purple tint */}
+      <section id="features" className="bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-900 scroll-mt-16">
         <FeaturesSection />
       </section>
 
-      {/* Reviews Section - Pink to orange gradient */}
-      <section id="reviews" className="bg-gradient-to-br from-fuchsia-900 via-rose-900 to-orange-900">
+      {/* Reviews Section - Clean slate background */}
+      <section id="reviews" className="bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 scroll-mt-16">
         <ReviewsSection />
       </section>
 
-      {/* Blog Section - Orange to amber gradient */}
-      <section id="blog" className="bg-gradient-to-br from-orange-900 via-amber-900 to-yellow-900">
+      {/* Blog Section - Subtle warm tint */}
+      <section id="blog" className="bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-900 scroll-mt-16">
         <BlogSection />
       </section>
 
-      {/* Download Section - Teal to emerald gradient */}
-      <section id="download" className="bg-gradient-to-br from-teal-900 via-emerald-900 to-green-900">
+      {/* Download Section - Green accent */}
+      <section id="download" className="bg-gradient-to-b from-slate-900 via-emerald-950/30 to-slate-900 scroll-mt-16">
         <DownloadSection />
       </section>
 
-      <Footer />
+      {/* Footer */}
+      <footer className="bg-slate-950">
+        <Footer />
+      </footer>
     </main>
   )
 }
