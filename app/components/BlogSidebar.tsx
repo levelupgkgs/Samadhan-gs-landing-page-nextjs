@@ -53,13 +53,13 @@ export default function BlogSidebar({ categories, selectedCategory }: BlogSideba
         <h3 className="text-xl font-bold text-white">Categories</h3>
       </div>
       
-      <div className="space-y-2">
+      <div className="space-y-2 max-h-[calc(100vh-200px)] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-blue-500/50 scrollbar-track-white/5">
         {/* All Posts Link */}
         <Link href="/blog" className={`
           flex items-center gap-3 p-3 rounded-xl transition-all duration-300 group
-          ${!selectedCategory 
-            ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg' 
-            : 'text-slate-300 hover:bg-white/10 hover:text-white'
+          ${!selectedCategory
+            ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg'
+            : 'text-white hover:bg-white/10'
           }
         `}>
           <BookOpen className="w-4 h-4" />
@@ -87,7 +87,7 @@ export default function BlogSidebar({ categories, selectedCategory }: BlogSideba
                     flex items-center gap-3 p-3 rounded-xl transition-all duration-300 group flex-1
                     ${isCategorySelected
                       ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg'
-                      : 'text-slate-300 hover:bg-white/10 hover:text-white'
+                      : 'text-white hover:bg-white/10'
                     }
                   `}
                 >
@@ -99,11 +99,11 @@ export default function BlogSidebar({ categories, selectedCategory }: BlogSideba
                     </span>
                   )}
                 </Link>
-                
+
                 {childCats.length > 0 && (
                   <button
                     onClick={() => toggleCategory(category._id)}
-                    className="p-2 text-slate-400 hover:text-white transition-colors ml-2"
+                    className="p-2 text-white hover:text-blue-300 transition-colors ml-2"
                   >
                     {isExpanded ? (
                       <ChevronDown className="w-4 h-4" />
@@ -129,14 +129,14 @@ export default function BlogSidebar({ categories, selectedCategory }: BlogSideba
                           flex items-center gap-3 p-2 rounded-lg transition-all duration-300 group text-sm
                           ${isSubCategorySelected
                             ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg'
-                            : 'text-slate-400 hover:bg-white/10 hover:text-white'
+                            : 'text-white hover:bg-white/10'
                           }
                         `}
                       >
                         <ChevronRight className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform" />
                         <span>{subCategory.title}</span>
                         {isSubCategorySelected && (
-                          <span className="ml-auto text-xs text-purple-300 bg-purple-500/30 px-2 py-1 rounded-full">
+                          <span className="ml-auto text-xs bg-white/20 px-2 py-1 rounded-full">
                             ✓
                           </span>
                         )}
@@ -162,7 +162,7 @@ export default function BlogSidebar({ categories, selectedCategory }: BlogSideba
                 flex items-center gap-3 p-3 rounded-xl transition-all duration-300 group
                 ${isCategorySelected
                   ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg'
-                  : 'text-slate-300 hover:bg-white/10 hover:text-white'
+                  : 'text-white hover:bg-white/10'
                 }
               `}
             >

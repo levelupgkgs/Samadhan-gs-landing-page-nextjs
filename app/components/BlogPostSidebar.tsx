@@ -56,11 +56,21 @@ export default function BlogPostSidebar({ allPosts, categories, currentSlug }: B
     return childCategories.filter(child => child.parentCategory?._id === parentId)
   }
 
-  // Get blog posts for a specific category
-  const getPostsForCategory = (categoryId: string) => {
-    return allPosts?.filter(post =>
-      post.categories?.some(cat => cat._id === categoryId)
-    ) || []
+  // Get blog posts for a specific category (including posts from child categories)
+  const getPostsForCategory = (categoryId: string, includeChildren: boolean = true) => {
+    if (!allPosts) return []
+
+    // Get all descendant category IDs
+    let categoryIds = [categoryId]
+
+    if (includeChildren) {
+      const descendants = getChildCategories(categoryId)
+      categoryIds = [categoryId, ...descendants.map(cat => cat._id)]
+    }
+
+    return allPosts.filter(post =>
+      post.categories?.some(cat => categoryIds.includes(cat._id))
+    )
   }
 
   return (
