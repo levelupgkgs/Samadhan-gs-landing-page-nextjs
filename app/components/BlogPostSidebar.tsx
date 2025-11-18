@@ -121,8 +121,15 @@ export default function BlogPostSidebar({ allPosts, categories, currentSlug }: B
               {/* Show posts for this parent category and its subcategories */}
               {isExpanded && (
                 <div className="ml-6 space-y-1 border-l border-white/10 pl-4">
-                  {/* Posts directly in parent category */}
-                  {categoryPosts.map((post) => (
+                  {/* Only show posts that are DIRECTLY in parent category (not in any subcategory) */}
+                  {categoryPosts.filter(post => {
+                    // Check if post is directly in parent category and NOT in any child category
+                    const isInParent = post.categories?.some(cat => cat._id === category._id)
+                    const isInAnyChild = childCats.some(childCat =>
+                      post.categories?.some(cat => cat._id === childCat._id)
+                    )
+                    return isInParent && !isInAnyChild
+                  }).map((post) => (
                     <Link
                       key={post._id}
                       href={`/blog/${post.slug.current}`}
@@ -153,7 +160,7 @@ export default function BlogPostSidebar({ allPosts, categories, currentSlug }: B
 
                   {/* Child Categories */}
                   {childCats.map((subCategory) => {
-                    const subCategoryPosts = getPostsForCategory(subCategory._id)
+                    const subCategoryPosts = getPostsForCategory(subCategory._id, false)
                     const isSubExpanded = expandedCategories.includes(subCategory._id)
 
                     return (
@@ -170,7 +177,7 @@ export default function BlogPostSidebar({ allPosts, categories, currentSlug }: B
                         </button>
 
                         {/* Posts in subcategory */}
-                        {isSubExpanded && (
+                        {isSubExpanded && subCategoryPosts.length > 0 && (
                           <div className="ml-6 space-y-1 border-l border-white/10 pl-3">
                             {subCategoryPosts.map((post) => (
                               <Link
