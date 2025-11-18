@@ -75,7 +75,9 @@ export default function HeroSection() {
             transition={{ delay: 0.6 }}
           >
             <motion.a
-              href="https://play.google.com/store"
+              href="https://play.google.com/store/apps/details?id=com.gs.samadhan"
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -84,7 +86,7 @@ export default function HeroSection() {
             </motion.a>
 
             {/* Secondary Action Buttons */}
-            <motion.div 
+            <motion.div
               className="flex gap-4 justify-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -98,13 +100,14 @@ export default function HeroSection() {
               >
                 Browse Syllabus
               </motion.a>
-              <motion.button
+              <motion.a
+                href="/blog"
                 className="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 rounded-full font-medium hover:bg-white/20 transition-all duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 Exam Analysis
-              </motion.button>
+              </motion.a>
             </motion.div>
           </motion.div>
         </motion.div>

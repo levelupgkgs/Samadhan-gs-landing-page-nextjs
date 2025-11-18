@@ -29,23 +29,23 @@ const faqs = [
     ]
   },
   {
-    category: 'Account & Subscription',
+    category: 'Account',
     questions: [
       {
         q: 'How do I create an account?',
-        a: 'You can create an account by downloading our app from Google Play Store or App Store and signing up with your email address or phone number. You can also sign up using your Google or Facebook account.'
+        a: 'You can create an account by downloading our app from Google Play Store and signing up with your email address or your Google account. Simply click on "Sign Up" and follow the instructions to create your account.'
       },
       {
-        q: 'What subscription plans are available?',
-        a: 'We offer multiple subscription plans: Free (basic features), Monthly Premium, Quarterly Premium, and Annual Premium. Premium plans unlock all content, ad-free experience, detailed analytics, and personalized study plans. Check our app for current pricing.'
+        q: 'Is Samadhan GS free to use?',
+        a: 'Yes! Samadhan GS is completely free to use. All features including study materials, quizzes, current affairs, and progress tracking are available at no cost. We believe quality education should be accessible to everyone.'
       },
       {
-        q: 'How can I cancel my subscription?',
-        a: 'You can cancel your subscription anytime through the app settings or through your Google Play/App Store subscription settings. Your access will continue until the end of the current billing period.'
+        q: 'Is there any age requirement to use the app?',
+        a: 'No, there is no age requirement to use Samadhan GS. As an educational app designed for competitive exam preparation, it is suitable for learners of all ages who want to prepare for government examinations.'
       },
       {
-        q: 'Do you offer refunds?',
-        a: 'Yes, we offer a 7-day refund policy. If you are not satisfied with our premium services within 7 days of purchase, you can request a full refund by contacting us at samadhangsexam@gmail.com.'
+        q: 'Can I use the same account on multiple devices?',
+        a: 'Yes, you can use your Samadhan GS account on multiple devices. Simply log in with your email or Google account on any device to access your progress and saved content.'
       }
     ]
   },
@@ -66,7 +66,7 @@ const faqs = [
       },
       {
         q: 'Do you provide video lectures?',
-        a: 'Yes, we offer video lectures from experienced educators covering all major topics. Premium subscribers get access to our complete video library with downloadable options.'
+        a: 'Yes, we offer video lectures from experienced educators covering all major topics. All users get access to our complete video library with downloadable options for offline viewing.'
       }
     ]
   },
@@ -79,7 +79,7 @@ const faqs = [
       },
       {
         q: 'I forgot my password. How can I reset it?',
-        a: 'Click on "Forgot Password" on the login screen and enter your registered email or phone number. You will receive a password reset link or OTP to create a new password.'
+        a: 'Click on "Forgot Password" on the login screen and enter your registered email address. You will receive a password reset link to create a new password. If you signed up with Google, simply use the "Sign in with Google" option.'
       },
       {
         q: 'My data/progress is not syncing across devices.',

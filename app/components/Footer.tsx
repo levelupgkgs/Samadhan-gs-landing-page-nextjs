@@ -66,7 +66,6 @@ const socialMedia = [
 const quickLinks = [
   { name: 'Home', href: '/' },
   { name: 'Blog', href: '/blog' },
-  { name: 'About Us', href: '/#about' },
   { name: 'Features', href: '/#features' },
   { name: 'Download App', href: '/#download' },
   { name: 'Contact', href: '/contact' }
