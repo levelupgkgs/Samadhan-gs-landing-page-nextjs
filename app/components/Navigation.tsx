@@ -10,6 +10,7 @@ const navItems = [
   { name: 'Home', href: '#home', isSection: true },
   { name: 'Features', href: '#features', isSection: true },
   { name: 'Reviews', href: '#reviews', isSection: true },
+  { name: 'Syllabus', href: '/syllabus', isSection: false },
   { name: 'Blog', href: '/blog', isSection: false },
   { name: 'Download', href: '#download', isSection: true }
 ]

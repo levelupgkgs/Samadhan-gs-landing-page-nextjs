@@ -41,12 +41,33 @@ const getSubCategoryImageUrl = (subcategory: SubCategory) => `https://server.sam
 
 // Reusable Image component with fallback
 const ImageWithFallback = (props: ImageProps & { fallbackSrc: string }) => {
-  const { src, fallbackSrc, ...rest } = props;
+  const { src, fallbackSrc, alt, ...rest } = props;
   const [imgSrc, setImgSrc] = useState(src);
-  useEffect(() => { setImgSrc(src); }, [src]);
-  return <Image {...rest} src={imgSrc} onError={() => setImgSrc(fallbackSrc)} />;
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    setImgSrc(src);
+    setHasError(false);
+  }, [src]);
+
+  const handleError = () => {
+    if (!hasError) {
+      setHasError(true);
+      setImgSrc(fallbackSrc);
+    }
+  };
+
+  return (
+    <Image
+      {...rest}
+      src={imgSrc}
+      alt={alt || 'Image'}
+      onError={handleError}
+      unoptimized={hasError}
+    />
+  );
 };
-const fallbackImg = `https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300`;
+const fallbackImg = `/images/book-fallback.svg`;
 
 // Custom Badge component
 const CustomBadge = ({ children, className }: { children: React.ReactNode, className?: string }) => (
@@ -200,10 +221,22 @@ export default function SyllabusPage() {
   const { data: apiData, isLoading, error } = useQuery<Category[]>({
     queryKey: ['syllabusData'],
     queryFn: async () => {
-      const response = await fetch('https://server.samadhangs.com/api/landing-page');
-      if (!response.ok) throw new Error('Failed to fetch syllabus data');
+      const response = await fetch('https://server.samadhangs.com/api/landing-page', {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+        },
+        cache: 'no-store',
+      });
+      if (!response.ok) {
+        throw new Error(`Failed to fetch syllabus data (${response.status})`);
+      }
       return await response.json();
-    }
+    },
+    retry: 3,
+    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    refetchOnWindowFocus: false,
   });
 
   const categories = ["All Categories", ...(apiData?.map(cat => cleanCategoryName(cat.category_name)) || [])];
