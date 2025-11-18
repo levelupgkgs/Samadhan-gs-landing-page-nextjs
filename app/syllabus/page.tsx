@@ -57,13 +57,16 @@ const ImageWithFallback = (props: ImageProps & { fallbackSrc: string }) => {
     }
   };
 
+  // Check if the image is from an external source that needs unoptimized loading
+  const isExternalImage = typeof imgSrc === 'string' && imgSrc.includes('server.samadhangs.com');
+
   return (
     <Image
       {...rest}
       src={imgSrc}
       alt={alt || 'Image'}
       onError={handleError}
-      unoptimized={hasError}
+      unoptimized={isExternalImage || hasError}
     />
   );
 };
