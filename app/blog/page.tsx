@@ -7,6 +7,10 @@ import Footer from '../components/Footer'
 import { Suspense } from 'react'
 import { BookOpen, Filter } from 'lucide-react'
 
+// Force dynamic rendering to ensure category filtering works
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export default async function BlogPage({ searchParams }: { searchParams: { category?: string } }) {
   console.log('BlogPage searchParams:', searchParams);
   

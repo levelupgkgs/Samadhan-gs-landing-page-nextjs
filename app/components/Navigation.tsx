@@ -171,12 +171,20 @@ export default function Navigation() {
             <div className="absolute top-0 right-0 bottom-0 w-64 bg-gray-900 border-l border-white/10 overflow-y-auto">
               <div className="flex flex-col space-y-1 p-6 pt-20">
                 {navItems.map((item) => {
+                  const isActive = item.isSection
+                    ? (isHomePage && activeSection === item.href.slice(1))
+                    : pathname === item.href
+
                   if (item.isSection) {
                     return (
                       <button
                         key={item.name}
                         onClick={() => handleNavClick(item)}
-                        className="text-left px-4 py-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all"
+                        className={`text-left px-4 py-3 rounded-lg transition-all ${
+                          isActive
+                            ? 'text-blue-400 bg-blue-500/10'
+                            : 'text-gray-300 hover:text-white hover:bg-white/10'
+                        }`}
                       >
                         {item.name}
                       </button>
@@ -190,7 +198,7 @@ export default function Navigation() {
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       <div className={`px-4 py-3 rounded-lg transition-all ${
-                        pathname === item.href
+                        isActive
                           ? 'text-blue-400 bg-blue-500/10'
                           : 'text-gray-300 hover:text-white hover:bg-white/10'
                       }`}>

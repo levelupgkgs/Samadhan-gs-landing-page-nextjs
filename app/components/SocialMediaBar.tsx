@@ -73,7 +73,7 @@ const socialMedia = [
 ]
 
 export default function SocialMediaBar() {
-  const [isExpanded, setIsExpanded] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(true) // Start expanded by default
 
   const handleSocialClick = (social: typeof socialMedia[0], e: React.MouseEvent) => {
     // Check if it's a mobile device
