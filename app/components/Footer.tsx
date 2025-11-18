@@ -65,6 +65,7 @@ const socialMedia = [
 // Quick links for navigation
 const quickLinks = [
   { name: 'Home', href: '/' },
+  { name: 'Syllabus', href: '/syllabus' },
   { name: 'Blog', href: '/blog' },
   { name: 'Features', href: '/#features' },
   { name: 'Download App', href: '/#download' },
