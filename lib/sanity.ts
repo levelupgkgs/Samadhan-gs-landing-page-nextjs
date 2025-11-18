@@ -85,8 +85,12 @@ export async function getBlogPosts(categorySlug?: string) {
 
   // Only pass categorySlug as parameter if it's defined and not 'undefined'
   const params = (categorySlug && categorySlug !== 'undefined') ? { categorySlug } : {};
-  const result = await client.fetch(query, params);
-  console.log('getBlogPosts result:', result.length, 'posts for category:', categorySlug);
+  const result = await client.fetch(query, params, {
+    // Disable caching to ensure fresh results
+    cache: 'no-store'
+  });
+  console.log('getBlogPosts result:', result?.length || 0, 'posts for category:', categorySlug);
+  console.log('Query params:', params);
   return result;
 }
 

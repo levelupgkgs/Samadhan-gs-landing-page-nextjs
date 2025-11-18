@@ -7,6 +7,10 @@ import Footer from '../components/Footer'
 import { Suspense } from 'react'
 import { BookOpen, Filter } from 'lucide-react'
 
+// Force dynamic rendering to ensure category filtering works
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export default async function BlogPage({ searchParams }: { searchParams: { category?: string } }) {
   console.log('BlogPage searchParams:', searchParams);
   
@@ -47,10 +51,10 @@ export default async function BlogPage({ searchParams }: { searchParams: { categ
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            {/* Sidebar */}
-            <div className="lg:col-span-1 order-2 lg:order-1">
+            {/* Sidebar - Show at top on mobile */}
+            <div className="lg:col-span-1 order-1">
               <Suspense fallback={
-                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10">
+                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10 sticky top-6">
                   <div className="animate-pulse">
                     <div className="h-8 bg-white/20 rounded mb-4"></div>
                     <div className="space-y-3">
@@ -64,9 +68,9 @@ export default async function BlogPage({ searchParams }: { searchParams: { categ
                 <BlogSidebar categories={categories} selectedCategory={searchParams.category} />
               </Suspense>
             </div>
-            
+
             {/* Main Content */}
-            <div className="lg:col-span-3 order-1 lg:order-2">
+            <div className="lg:col-span-3 order-2">
               {/* Results Count */}
               <div className="mb-6 flex items-center justify-between bg-white/5 backdrop-blur-sm rounded-lg p-4">
                 <div className="flex items-center gap-3">
