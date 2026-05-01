@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Mail, Phone, MapPin } from 'lucide-react'
+import Image from 'next/image'
 
 // Social media data with icons and URLs
 const socialMedia = [
@@ -97,9 +98,13 @@ export default function Footer() {
           >
             <Link href="/">
               <div className="flex items-center space-x-3 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
-                  <span className="text-white font-bold">SG</span>
-                </div>
+                <Image
+                  src="/images/samadhan-logo.webp"
+                  alt="Samadhan GS"
+                  width={40}
+                  height={40}
+                  className="rounded-xl"
+                />
                 <h3 className="text-2xl font-bold text-white">Samadhan GS</h3>
               </div>
             </Link>

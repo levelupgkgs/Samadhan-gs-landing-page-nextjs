@@ -1,5 +1,6 @@
 import Navigation from '../components/Navigation'
 import Footer from '../components/Footer'
+import Image from 'next/image'
 import { Building2, Target, BookOpen, Globe, Download, BarChart2, RefreshCw, Brain, PenLine, Mail, MapPin } from 'lucide-react'
 
 export const metadata = {
@@ -76,8 +77,14 @@ export default function AboutPage() {
 
           {/* Hero */}
           <div className="text-center mb-16">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl mb-6">
-              <Building2 className="w-8 h-8 text-white" />
+            <div className="inline-flex items-center justify-center mb-6">
+              <Image
+                src="/images/samadhan-logo.webp"
+                alt="Samadhan GS"
+                width={80}
+                height={80}
+                className="rounded-2xl"
+              />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">About Us</h1>
             <p className="text-gray-300 text-lg max-w-2xl mx-auto">
@@ -88,9 +95,13 @@ export default function AboutPage() {
           {/* Brand Identity */}
           <section className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-md rounded-2xl p-8 border border-blue-500/30 mb-10">
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                <span className="text-white font-bold text-lg">SG</span>
-              </div>
+              <Image
+                src="/images/samadhan-logo.webp"
+                alt="Samadhan GS"
+                width={48}
+                height={48}
+                className="rounded-xl flex-shrink-0"
+              />
               <div>
                 <h2 className="text-2xl font-bold text-white mb-2">Samadhan GS</h2>
                 <p className="text-blue-300 text-sm font-medium mb-4">A product of Shivam Trading</p>

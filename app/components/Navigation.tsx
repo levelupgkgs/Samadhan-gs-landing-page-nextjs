@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { X } from 'lucide-react'
+import Image from 'next/image'
 
 const navItems = [
   { name: 'Home', href: '#home', isSection: true },
@@ -91,7 +92,13 @@ export default function Navigation() {
                 className="flex items-center space-x-2 cursor-pointer"
                 whileHover={{ scale: 1.05 }}
               >
-                <span className="text-2xl">📚</span>
+                <Image
+                  src="/images/samadhan-logo.webp"
+                  alt="Samadhan GS"
+                  width={36}
+                  height={36}
+                  className="rounded-lg"
+                />
                 <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                   Samadhan GS
                 </span>
