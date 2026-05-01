@@ -35,7 +35,7 @@ export default function TermsPage() {
             <section className="bg-white/5 backdrop-blur-md rounded-2xl p-6 md:p-8 border border-white/10">
               <h2 className="text-2xl font-bold text-white mb-4">1. Agreement to Terms</h2>
               <p className="text-gray-300 leading-relaxed">
-                By accessing or using the Samadhan GS mobile application and website (collectively, the "Service"), you agree to be bound by these Terms and Conditions. If you disagree with any part of these terms, you may not access the Service. These Terms apply to all visitors, users, and others who access or use the Service in India and worldwide.
+                Samadhan GS is a product of <strong className="text-white">Shivam Trading</strong>. By accessing or using the Samadhan GS mobile application and website (collectively, the "Service"), you agree to be bound by these Terms and Conditions. If you disagree with any part of these terms, you may not access the Service. These Terms apply to all visitors, users, and others who access or use the Service in India and worldwide.
               </p>
             </section>
 
@@ -214,6 +214,7 @@ export default function TermsPage() {
               </p>
               <div className="bg-white/10 rounded-xl p-4">
                 <p className="text-white font-semibold">Samadhan GS</p>
+                <p className="text-gray-400 text-sm mb-1">A product of Shivam Trading</p>
                 <a href="mailto:samadhangsexam@gmail.com" className="text-blue-400 hover:underline">
                   samadhangsexam@gmail.com
                 </a>

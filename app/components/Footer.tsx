@@ -74,6 +74,7 @@ const quickLinks = [
 
 // Support & Legal links
 const supportLinks = [
+  { name: 'About Us', href: '/about' },
   { name: 'Privacy Policy', href: '/privacy-policy' },
   { name: 'Terms & Conditions', href: '/terms-and-conditions' },
   { name: 'FAQ', href: '/faq' },
@@ -206,9 +207,14 @@ export default function Footer() {
           viewport={{ once: true }}
           className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4"
         >
-          <p className="text-sm text-gray-400">
-            © {new Date().getFullYear()} Samadhan GS. All rights reserved.
-          </p>
+          <div>
+            <p className="text-sm text-gray-400">
+              © {new Date().getFullYear()} Samadhan GS. All rights reserved.
+            </p>
+            <p className="text-xs text-gray-500 mt-1">
+              Samadhan GS is a product of <span className="text-gray-400 font-medium">Shivam Trading</span>
+            </p>
+          </div>
           <p className="text-gray-400 text-sm">
             Made with ❤️ for aspirants across India
           </p>

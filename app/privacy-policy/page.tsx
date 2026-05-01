@@ -38,7 +38,7 @@ export default function PrivacyPolicyPage() {
                 Introduction
               </h2>
               <p className="text-gray-300 leading-relaxed">
-                Samadhan GS ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application and website. We are based in India and comply with applicable Indian data protection laws, including the Information Technology Act, 2000 and the Digital Personal Data Protection Act, 2023.
+                Samadhan GS is a product of <strong className="text-white">Shivam Trading</strong>. Samadhan GS ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application and website. We are based in India and comply with applicable Indian data protection laws, including the Information Technology Act, 2000 and the Digital Personal Data Protection Act, 2023.
               </p>
             </section>
 
@@ -164,6 +164,7 @@ export default function PrivacyPolicyPage() {
               </p>
               <div className="bg-white/10 rounded-xl p-4">
                 <p className="text-white font-semibold">Samadhan GS</p>
+                <p className="text-gray-400 text-sm mb-1">A product of Shivam Trading</p>
                 <a href="mailto:samadhangsexam@gmail.com" className="text-blue-400 hover:underline">
                   samadhangsexam@gmail.com
                 </a>
