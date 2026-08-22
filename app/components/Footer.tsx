@@ -100,7 +100,7 @@ export default function Footer() {
               <div className="flex items-center space-x-3 mb-4">
                 <Image
                   src="/images/samadhan-logo.webp"
-                  alt="Samadhan GS"
+                  alt=""
                   width={40}
                   height={40}
                   className="rounded-xl"

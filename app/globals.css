@@ -190,3 +190,38 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgba(59, 130, 246, 0.7);
 }
+
+/* Hero background specks. Kept on the compositor (transform/opacity only)
+   so they cost no main-thread time while the page is booting. */
+.hero-particle {
+  position: absolute;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.1);
+  will-change: transform, opacity;
+  animation-name: hero-particle-drift;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes hero-particle-drift {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, -100px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-particle {
+    animation: none;
+    opacity: 0.4;
+  }
+}

@@ -1,0 +1,24 @@
+# Samadhan GS
+
+> A free Android app and study portal for Indian government competitive exams. It covers the complete GK/GS (General Knowledge / General Studies) syllabus in bilingual Hindi and English, with notes, daily practice quizzes and a leaderboard.
+
+Samadhan GS targets MCQ-based government exams including SSC (MTS, CGL, CHSL), Railway (NTPC, Group D, Technician), Bihar state exams (BSSC, Bihar Police, Bihar CGL), State PCS preliminary exams and other central and state one-day exams.
+
+## Pages
+
+- [Home](https://www.samadhangs.com/): Overview of the app, its features and download links.
+- [Syllabus](https://www.samadhangs.com/syllabus): The complete GK/GS syllabus broken down by subject.
+- [Blog](https://www.samadhangs.com/blog): Exam analysis, current affairs and preparation guides.
+- [About](https://www.samadhangs.com/about): Background on the project and the team behind it.
+- [FAQ](https://www.samadhangs.com/faq): Common questions about the app and exam preparation.
+- [Contact](https://www.samadhangs.com/contact): How to get in touch.
+
+## Legal
+
+- [Privacy Policy](https://www.samadhangs.com/privacy-policy)
+- [Terms and Conditions](https://www.samadhangs.com/terms-and-conditions)
+- [Data Deletion](https://www.samadhangs.com/data-deletion)
+
+## App
+
+- [Samadhan GS on Google Play](https://play.google.com/store/apps/details?id=com.gs.samadhan): The Android app. Free to download.

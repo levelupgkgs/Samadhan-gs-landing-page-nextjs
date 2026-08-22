@@ -71,8 +71,34 @@ export function ScreenshotGallery({
 
   const showFan = fanned && isWide
 
+  // Only the screenshots that have actually been shown get an <img>. Mounting
+  // all five would download every one on first paint even though four are
+  // transparent, which is pure LCP cost.
+  const [seen, setSeen] = useState<number[]>([0])
+  const [idle, setIdle] = useState(false)
+
   const go = useCallback((step: number) => {
-    setIndex((i) => (i + step + COUNT) % COUNT)
+    setIndex((i) => {
+      const next = (i + step + COUNT) % COUNT
+      setSeen((s) => (s.includes(next) ? s : [...s, next]))
+      return next
+    })
+  }, [])
+
+  // Neighbours are only needed once the page has settled — and in the fanned
+  // layout, where they are actually visible.
+  useEffect(() => {
+    const cb = () => setIdle(true)
+    const w = window as Window & {
+      requestIdleCallback?: (fn: () => void, o?: { timeout: number }) => number
+      cancelIdleCallback?: (id: number) => void
+    }
+    if (w.requestIdleCallback) {
+      const id = w.requestIdleCallback(cb, { timeout: 2500 })
+      return () => w.cancelIdleCallback?.(id)
+    }
+    const t = setTimeout(cb, 1500)
+    return () => clearTimeout(t)
   }, [])
 
   useEffect(() => {
@@ -128,6 +154,7 @@ export function ScreenshotGallery({
           {APP_SCREENSHOTS.map((shot, i) => {
             const d = offsetFrom(i, index)
             const isActive = d === 0
+            const render = isActive || seen.includes(i) || (idle && showFan && Math.abs(d) === 1)
             return (
               <motion.div
                 key={shot.src}
@@ -137,15 +164,18 @@ export function ScreenshotGallery({
                 transition={{ type: 'spring', stiffness: 260, damping: 30 }}
                 aria-hidden={!isActive}
               >
-                <Image
-                  src={shot.src}
-                  alt={shot.alt}
-                  fill
-                  sizes="(max-width: 640px) 260px, 300px"
-                  className="object-cover pointer-events-none select-none"
-                  draggable={false}
-                  priority={priority && i === 0}
-                />
+                {render && (
+                  <Image
+                    src={shot.src}
+                    alt={shot.alt}
+                    fill
+                    sizes="(max-width: 640px) 260px, 300px"
+                    quality={65}
+                    className="object-cover pointer-events-none select-none"
+                    draggable={false}
+                    priority={priority && i === 0}
+                  />
+                )}
               </motion.div>
             )
           })}
@@ -160,18 +190,26 @@ export function ScreenshotGallery({
         </button>
       </div>
 
-      {/* Indicators */}
-      <div className="flex items-center gap-2">
+      {/* Indicators — the dot is decorative; the button around it carries a
+          24px+ hit area so it is a usable touch target. */}
+      <div className="flex items-center">
         {APP_SCREENSHOTS.map((shot, i) => (
           <button
             key={shot.src}
-            onClick={() => setIndex(i)}
+            onClick={() => {
+              setIndex(i)
+              setSeen((s) => (s.includes(i) ? s : [...s, i]))
+            }}
             aria-label={`Show screenshot ${i + 1} of ${COUNT}`}
             aria-current={i === index}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              i === index ? 'w-6 bg-white' : 'w-2 bg-white/30 hover:bg-white/60'
-            }`}
-          />
+            className="flex items-center justify-center w-8 h-8 group"
+          >
+            <span
+              className={`h-2 rounded-full transition-all duration-300 ${
+                i === index ? 'w-6 bg-white' : 'w-2 bg-white/30 group-hover:bg-white/60'
+              }`}
+            />
+          </button>
         ))}
       </div>
 

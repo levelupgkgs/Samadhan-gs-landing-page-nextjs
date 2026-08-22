@@ -3,6 +3,24 @@ import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react';
 import { ScreenshotGallery } from './AppScreenshots';
 
+/**
+ * Fixed so the markup is stable between renders, and so the drifting specks
+ * can be driven by CSS keyframes on the compositor rather than by twenty
+ * independent JS animation loops on the main thread.
+ */
+const PARTICLES = [
+  { left: 8, top: 72, duration: 4.2, delay: 0 },
+  { left: 21, top: 34, duration: 3.4, delay: 1.1 },
+  { left: 33, top: 88, duration: 5.0, delay: 0.4 },
+  { left: 44, top: 18, duration: 3.8, delay: 1.8 },
+  { left: 57, top: 63, duration: 4.6, delay: 0.9 },
+  { left: 69, top: 29, duration: 3.2, delay: 1.4 },
+  { left: 78, top: 81, duration: 4.9, delay: 0.2 },
+  { left: 88, top: 47, duration: 3.6, delay: 1.6 },
+  { left: 15, top: 55, duration: 4.4, delay: 2.1 },
+  { left: 63, top: 92, duration: 3.9, delay: 0.7 },
+]
+
 export default function HeroSection() {
   const [isClient, setIsClient] = useState(false);
 
@@ -14,25 +32,16 @@ export default function HeroSection() {
     <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden pt-16">
       {/* Background Animation */}
       {isClient && (
-        <div className="absolute inset-0 overflow-hidden">
-          {[...Array(20)].map((_, i) => (
-            <motion.div
+        <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+          {PARTICLES.map((p, i) => (
+            <span
               key={i}
-              className="absolute w-2 h-2 bg-white/10 rounded-full"
-              initial={{ opacity: 0, y: 100 }}
-              animate={{
-                opacity: [0, 1, 0],
-                y: [-100, -200],
-                x: Math.random() * 100 - 50
-              }}
-              transition={{
-                duration: Math.random() * 3 + 2,
-                repeat: Infinity,
-                delay: Math.random() * 2
-              }}
+              className="hero-particle"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`
+                left: `${p.left}%`,
+                top: `${p.top}%`,
+                animationDuration: `${p.duration}s`,
+                animationDelay: `${p.delay}s`,
               }}
             />
           ))}

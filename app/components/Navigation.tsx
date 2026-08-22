@@ -94,7 +94,7 @@ export default function Navigation() {
               >
                 <Image
                   src="/images/samadhan-logo.webp"
-                  alt="Samadhan GS"
+                  alt=""
                   width={36}
                   height={36}
                   className="rounded-lg"
@@ -152,6 +152,8 @@ export default function Navigation() {
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="text-gray-300 hover:text-white p-2"
+                aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={isMobileMenuOpen}
               >
                 {isMobileMenuOpen ? (
                   <X className="w-6 h-6" />

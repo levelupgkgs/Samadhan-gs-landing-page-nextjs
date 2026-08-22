@@ -106,6 +106,8 @@ export default function SocialMediaBar() {
           <button
             onClick={() => setIsExpanded(!isExpanded)}
             className="absolute -left-10 top-1/2 -translate-y-1/2 bg-gradient-to-r from-blue-500 to-purple-500 text-white p-2 rounded-l-lg shadow-lg hover:shadow-xl transition-all hover:scale-105 z-[100]"
+            aria-label={isExpanded ? 'Hide social media links' : 'Show social media links'}
+            aria-expanded={isExpanded}
           >
             {isExpanded ? (
               <ChevronRight className="w-5 h-5" />
