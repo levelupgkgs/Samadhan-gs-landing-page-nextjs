@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Download, Star, Users, BookOpen, Shield, Smartphone, CheckCircle } from 'lucide-react'
-import { ScreenshotStack } from './AppScreenshots'
+import { ScreenshotGallery } from './AppScreenshots'
 
 const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.gs.samadhan'
 
@@ -172,18 +172,7 @@ export default function DownloadSection() {
             viewport={{ once: true }}
             className="flex flex-col items-center"
           >
-            <motion.div
-              animate={{
-                y: [0, -15, 0],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              <ScreenshotStack />
-            </motion.div>
+            <ScreenshotGallery fanned />
 
             {/* Download reminder */}
             <motion.p

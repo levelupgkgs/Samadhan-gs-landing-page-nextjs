@@ -1,7 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react';
-import { ScreenshotCarousel } from './AppScreenshots';
+import { ScreenshotGallery } from './AppScreenshots';
 
 export default function HeroSection() {
   const [isClient, setIsClient] = useState(false);
@@ -119,16 +119,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <motion.div
-            animate={{ y: [0, -10, 0] }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          >
-            <ScreenshotCarousel priority />
-          </motion.div>
+          <ScreenshotGallery autoPlay={3500} priority />
         </motion.div>
       </div>
 
