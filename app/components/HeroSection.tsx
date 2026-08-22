@@ -1,7 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import { useState, useEffect } from 'react';
+import { ScreenshotCarousel } from './AppScreenshots';
 
 export default function HeroSection() {
   const [isClient, setIsClient] = useState(false);
@@ -112,44 +112,22 @@ export default function HeroSection() {
           </motion.div>
         </motion.div>
 
-        {/* Phone Mockup */}
-        <motion.div 
+        {/* App screenshots */}
+        <motion.div
           className="flex justify-center lg:justify-end"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
           <motion.div
-            className="relative"
-            animate={{ 
-              y: [0, -10, 0],
-              rotateY: [0, 5, 0]
-            }}
-            transition={{ 
+            animate={{ y: [0, -10, 0] }}
+            transition={{
               duration: 4,
               repeat: Infinity,
               ease: "easeInOut"
             }}
           >
-            <div className="w-64 h-[500px] bg-gray-900 rounded-[2.5rem] p-4 shadow-2xl">
-              <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 rounded-[2rem] flex flex-col items-center justify-center text-white relative overflow-hidden">
-                <div className="absolute top-6 w-16 h-1 bg-white/30 rounded-full"></div>
-                <div className="text-center p-8">
-                  <div className="w-16 h-16 bg-white/20 rounded-2xl mb-4 mx-auto flex items-center justify-center">
-                    <span className="text-2xl">📚</span>
-                  </div>
-                  <h3 className="font-bold text-lg mb-2">Master on GK/GS</h3>
-                  <p className="text-sm opacity-80">Complete Exam Prep</p>
-                </div>
-                <div className="grid grid-cols-2 gap-2 w-full px-4">
-                  {['GS/GK', 'UPSC', 'SSC', 'Notes'].map((item, i) => (
-                    <div key={i} className="bg-white/10 p-3 rounded-lg text-center text-xs">
-                      {item}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <ScreenshotCarousel priority />
           </motion.div>
         </motion.div>
       </div>

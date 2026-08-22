@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Download, Star, Users, BookOpen, Shield, Smartphone, CheckCircle } from 'lucide-react'
+import { ScreenshotStack } from './AppScreenshots'
 
 const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.gs.samadhan'
 
@@ -163,7 +164,7 @@ export default function DownloadSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right side - Phone mockup with enhanced design */}
+          {/* Right side - real app screenshots */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -171,7 +172,6 @@ export default function DownloadSection() {
             viewport={{ once: true }}
             className="flex flex-col items-center"
           >
-            {/* Animated Phone */}
             <motion.div
               animate={{
                 y: [0, -15, 0],
@@ -181,60 +181,8 @@ export default function DownloadSection() {
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
-              className="relative"
             >
-              {/* Glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-500 rounded-[3rem] blur-2xl opacity-30"></div>
-
-              {/* Phone frame */}
-              <div className="relative w-64 h-[500px] bg-gray-900 rounded-[3rem] p-4 shadow-2xl border border-gray-700">
-                {/* Screen */}
-                <div className="w-full h-full bg-gradient-to-br from-green-500 via-emerald-500 to-teal-600 rounded-[2.5rem] flex flex-col items-center justify-between text-white relative overflow-hidden">
-                  {/* Notch */}
-                  <div className="absolute top-4 w-20 h-6 bg-black rounded-full"></div>
-
-                  {/* Animated background */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-t from-transparent via-white/5 to-transparent"
-                    animate={{ y: [-200, 500] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                  />
-
-                  {/* Content */}
-                  <div className="flex-1 flex flex-col items-center justify-center p-6 relative z-10">
-                    <motion.div
-                      className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-3xl mb-4 flex items-center justify-center shadow-lg"
-                      animate={{ rotate: [0, 5, 0, -5, 0] }}
-                      transition={{ duration: 4, repeat: Infinity }}
-                    >
-                      <span className="text-4xl">📚</span>
-                    </motion.div>
-                    <h3 className="font-bold text-xl mb-2">Samadhan GS</h3>
-                    <p className="text-sm opacity-90 mb-4">Master GK/GS for Exams</p>
-
-                    {/* Mini features */}
-                    <div className="grid grid-cols-2 gap-2 w-full">
-                      {['GS/GK', 'Quizzes', 'Notes', 'Current Affairs'].map((item, i) => (
-                        <motion.div
-                          key={i}
-                          className="bg-white/10 backdrop-blur-sm p-2 rounded-lg text-center text-xs"
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: i * 0.1 }}
-                          viewport={{ once: true }}
-                        >
-                          {item}
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Bottom bar */}
-                  <div className="w-full p-4">
-                    <div className="w-32 h-1 bg-white/30 rounded-full mx-auto"></div>
-                  </div>
-                </div>
-              </div>
+              <ScreenshotStack />
             </motion.div>
 
             {/* Download reminder */}
