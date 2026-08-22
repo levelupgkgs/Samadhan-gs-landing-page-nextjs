@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { Share2, X } from 'lucide-react'
 
 const socialMedia = [
   {
@@ -73,7 +73,7 @@ const socialMedia = [
 ]
 
 export default function SocialMediaBar() {
-  const [isExpanded, setIsExpanded] = useState(true) // Start expanded by default
+  const [isExpanded, setIsExpanded] = useState(false) // Start collapsed by default
 
   const handleSocialClick = (social: typeof socialMedia[0], e: React.MouseEvent) => {
     // Check if it's a mobile device
@@ -110,9 +110,9 @@ export default function SocialMediaBar() {
             aria-expanded={isExpanded}
           >
             {isExpanded ? (
-              <ChevronRight className="w-5 h-5" />
+              <X className="w-5 h-5" />
             ) : (
-              <ChevronLeft className="w-5 h-5" />
+              <Share2 className="w-5 h-5" />
             )}
           </button>
 
