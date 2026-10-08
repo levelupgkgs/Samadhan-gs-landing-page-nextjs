@@ -5,7 +5,7 @@ import { Building2, Target, BookOpen, Globe, Download, BarChart2, RefreshCw, Bra
 
 export const metadata = {
   title: 'About Us | Samadhan GS',
-  description: 'Learn about Samadhan GS — a product of Shivam Trading — and how we help aspirants crack competitive exams.',
+  description: 'Learn about Samadhan GS — a product of Samadhan Education — and how we help aspirants crack competitive exams.',
 }
 
 const features = [
@@ -104,9 +104,9 @@ export default function AboutPage() {
               />
               <div>
                 <h2 className="text-2xl font-bold text-white mb-2">Samadhan GS</h2>
-                <p className="text-blue-300 text-sm font-medium mb-4">A product of Shivam Trading</p>
+                <p className="text-blue-300 text-sm font-medium mb-4">A product of Samadhan Education</p>
                 <p className="text-gray-300 leading-relaxed">
-                  Samadhan GS is India's trusted companion for competitive exam preparation. Built and operated by <strong className="text-white">Shivam Trading</strong>, our platform brings together expert-curated content, smart tools, and an intuitive mobile experience to help government job aspirants prepare efficiently for UPSC, SSC, State PSC, Railways, Banking, and other competitive exams.
+                  Samadhan GS is India's trusted companion for competitive exam preparation. Built and operated by <strong className="text-white">Samadhan Education</strong>, our platform brings together expert-curated content, smart tools, and an intuitive mobile experience to help government job aspirants prepare efficiently for UPSC, SSC, State PSC, Railways, Banking, and other competitive exams.
                 </p>
               </div>
             </div>
@@ -143,7 +143,7 @@ export default function AboutPage() {
           <section className="bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10 mb-10">
             <h2 className="text-2xl font-bold text-white mb-4">Behind the App</h2>
             <p className="text-gray-300 leading-relaxed">
-              Samadhan GS is developed and maintained by <strong className="text-white">Shivam Trading</strong>, a company dedicated to building educational technology products that make a real difference in students' lives. Our team of educators, developers, and subject-matter experts work continuously to keep the content fresh, accurate, and exam-relevant.
+              Samadhan GS is developed and maintained by <strong className="text-white">Samadhan Education</strong>, a company dedicated to building educational technology products that make a real difference in students' lives. Our team of educators, developers, and subject-matter experts work continuously to keep the content fresh, accurate, and exam-relevant.
             </p>
           </section>
 
@@ -157,7 +157,7 @@ export default function AboutPage() {
               Have questions, feedback, or partnership enquiries? We'd love to hear from you.
             </p>
             <div className="bg-white/10 rounded-xl p-5 space-y-3">
-              <p className="text-white font-semibold text-lg">Samadhan GS — Shivam Trading</p>
+              <p className="text-white font-semibold text-lg">Samadhan GS — Samadhan Education</p>
               <div className="flex items-center gap-2 text-gray-300">
                 <Mail className="w-4 h-4 text-blue-400" />
                 <a href="mailto:samadhangsexam@gmail.com" className="text-blue-400 hover:underline">

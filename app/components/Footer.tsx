@@ -217,7 +217,7 @@ export default function Footer() {
               © {new Date().getFullYear()} Samadhan GS. All rights reserved.
             </p>
             <p className="text-xs text-gray-500 mt-1">
-              Samadhan GS is a product of <span className="text-gray-400 font-medium">Shivam Trading</span>
+              Samadhan GS is a product of <span className="text-gray-400 font-medium">Samadhan Education</span>
             </p>
           </div>
           <p className="text-gray-400 text-sm">
